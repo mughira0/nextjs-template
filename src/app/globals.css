@@ -1,26 +1,119 @@
 @import "tailwindcss";
 
+/* =======================
+   Root Variables
+   ======================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Core brand & text */
+  --main-color: oklch(
+    68.75% 0.11338 194.878
+  ); /* Richer, more vibrant teal/cyan */
+  --background-color: oklch(99% 0.002 260); /* Cleaner near-white */
+  --primary-color: var(--main-color);
+  --secondary-color: oklch(40% 0.18 262); /* Deep indigo-blue with life */
+  --primary-text-color: oklch(18% 0.02 260); /* Very dark gray (almost black) */
+  --white-color: oklch(100% 0 0);
+  --secondary-text-color: oklch(45% 0.03 260); /* Medium-dark gray */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --radius: 0.625rem;
+  --global-radius: 5px;
+
+  --app-bg: oklch(98.5% 0.008 265); /* Very slightly cooler light bg */
+
+  /* Fields & buttons – unchanged structure */
+  --field-padding-sm: 0.5rem;
+  --field-padding-md: 0.75rem;
+  --field-padding-lg: 1rem;
+
+  --btn-padding-sm: 0.5rem 1rem;
+  --btn-padding-md: 0.75rem 1.5rem;
+  --btn-padding-lg: 1rem 2rem;
+
+  --field-radius: 7px;
+  --field-border: oklch(88% 0.015 260); /* Softer light gray border */
+  --field-color: oklch(15% 0.02 260);
+  --field-bg: oklch(100% 0 0);
+  --btn-radius: var(--field-radius);
+
+  /* Input specific */
+  --input-border: var(--field-border);
+  --input-color: var(--field-color);
+  --placeholder-color: oklch(62% 0.02 260); /* Muted gray */
+
+  --secondary-border: oklch(78% 0.02 260);
+  --secondary-color: oklch(22% 0.03 260);
+
+  --danger-border: oklch(68% 0.28 28); /* Vibrant red */
+  --danger-color: oklch(52% 0.28 28);
+
+  /* ==================== SIDEBAR (much better now) ==================== */
+  --sidebar-collapsed-width: 80px;
+  --sidebar-expanded-width: 200px;
+
+  /* New harmonious sidebar colors – soft blue-gray with subtle warmth */
+  --sidebar-bg: oklch(88.056% 0.05237 196.347); /* Very light cool gray-blue */
+  --sidebar-border: oklch(85% 0.04 255); /* Gentle mid-tone border */
+  --sidebar-shadow: 0 10px 25px oklch(0% 0 0 / 0.08); /* Softer, modern shadow */
+  --sidebar-radius: 0.875rem; /* Slightly rounder for elegance */
+
+  --sidebar-item-text: oklch(20% 0.03 260); /* Dark gray for readability */
+  --sidebar-item-icon: oklch(35% 0.04 260); /* Medium gray for icons */
+  --sidebar-item-active-text: var(--main-color);
+  --sidebar-item-active-icon: var(--main-color);
+  --sidebar-item-hover-bg: oklch(90% 0.05 200);
+  --sidebar-item-hover-text: var(--sidebar-item-active-text);
+  --sidebar-item-hover-icon: var(--sidebar-item-active-icon);
+
+  --header-bg: var(--sidebar-bg); /* Tiny bit lighter than sidebar */
+  --header-border: oklch(84% 0.045 255);
+  --header-shadow: 0 8px 20px oklch(0% 0 0 / 0.07);
+  --header-radius: 0.875rem;
+  --header-padding: 1rem; /* ← unchanged as requested */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background-color: oklch(8% 0.005 260); /* former #0a0a0a */
+    --foreground-color: oklch(92% 0.005 260); /* former #ededed */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* =======================
+   Base Styles
+   ======================= */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+/* =======================
+   Text Utilities
+   ======================= */
+.line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.hyperlink {
+  color: var(--main-color);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

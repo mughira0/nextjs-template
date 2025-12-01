@@ -1,5 +1,5 @@
 import SidebarSkeleton from "@/components/core/sidebarSkeleton";
-import Example from "./_example";
+import Example from "../_example";
 
 export default function Home() {
   return (
