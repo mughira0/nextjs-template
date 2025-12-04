@@ -2,7 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { FC, memo, useEffect, useState } from "react";
+import { FC, memo } from "react";
 
 interface LogoProps {
   isMobileView?: boolean;

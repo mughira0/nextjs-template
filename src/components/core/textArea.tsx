@@ -28,7 +28,7 @@ const TextArea: FC<TextAreaProps> = ({
       <textarea
         value={value}
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-          setter && setter(e.target.value)
+          setter?.(e.target.value)
         }
         placeholder={placeholder}
         disabled={disabled}

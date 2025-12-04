@@ -38,7 +38,7 @@ const Input: FC<InputProps> = ({
         type={type}
         value={value}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setter && setter(e.target.value)
+          setter?.(e.target.value)
         }
         placeholder={placeholder}
         disabled={disabled}

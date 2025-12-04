@@ -1,4 +1,4 @@
-function Label({ children }: { children: React.ReactNode }) {
+function Label({ children }: Readonly<{ children: React.ReactNode }>) {
   return <label className="mb-1 text-label font-medium">{children}</label>;
 }
 

@@ -1,17 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
+import storage from "redux-persist/lib/storage";
 import authReducer from "../slices/auth";
 import commonReducer from "../slices/common";
 
-import { persistStore } from "redux-persist";
 import {
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
+  persistStore,
   PURGE,
   REGISTER,
+  REHYDRATE,
 } from "redux-persist";
 
 // ==================

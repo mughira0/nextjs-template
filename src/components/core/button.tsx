@@ -25,9 +25,7 @@ const Button: FC<ButtonProps> = ({
 
   return (
     <button
-      onClick={(e: MouseEvent<HTMLButtonElement>) =>
-        !disabled && onClick && onClick(e)
-      }
+      onClick={(e: MouseEvent<HTMLButtonElement>) => onClick?.(e)}
       disabled={disabled}
       className={finalClass}
     >

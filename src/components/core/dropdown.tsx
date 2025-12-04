@@ -107,25 +107,30 @@ const Dropdown: FC<DropdownProps> = ({
       ...provided,
       padding: "4px",
     }),
-    option: (provided, state) => ({
-      ...provided,
-      backgroundColor: state.isFocused
-        ? variantConfig.focusBorderColorLight
-        : state.isSelected
-        ? variantConfig.focusBorderColor
-        : "transparent",
-      color:
-        state.isSelected || state.isFocused
-          ? "var(--white-color)"
-          : "var(--input-color)",
-      cursor: "pointer",
-      borderRadius: "4px",
-      padding: sizeConfig.padding,
-      fontSize: sizeConfig.control.fontSize,
-      "&:active": {
-        backgroundColor: variantConfig.focusBorderColor,
-      },
-    }),
+    option: (provided, state) => {
+      let backgroundColor = "transparent";
+      if (state.isFocused) {
+        backgroundColor = variantConfig.focusBorderColorLight;
+      } else if (state.isSelected) {
+        backgroundColor = variantConfig.focusBorderColor;
+      }
+
+      return {
+        ...provided,
+        backgroundColor,
+        color:
+          state.isSelected || state.isFocused
+            ? "var(--white-color)"
+            : "var(--input-color)",
+        cursor: "pointer",
+        borderRadius: "4px",
+        padding: sizeConfig.padding,
+        fontSize: sizeConfig.control.fontSize,
+        "&:active": {
+          backgroundColor: variantConfig.focusBorderColor,
+        },
+      };
+    },
     noOptionsMessage: (provided) => ({
       ...provided,
       color: "var(--placeholder-color)",

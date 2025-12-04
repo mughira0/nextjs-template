@@ -175,58 +175,76 @@ const SidebarItem: FC<SidebarItemProps> = ({
     <div
       className={cn("flex flex-col", level > 0 && !sidebarCollapsed && "ml-2")}
     >
-      <div
-        className={itemClasses}
-        role={hasSub ? "button" : undefined}
-        aria-expanded={hasSub ? isOpen : undefined}
-        tabIndex={hasSub ? 0 : undefined}
-        onKeyDown={handleKeyDown}
-      >
-        <Link
-          href={path || "#"}
-          className="flex items-center gap-3 flex-1"
-          title={sidebarCollapsed ? title : undefined}
-          onClick={(e) => {
-            if (hasSub && (sidebarCollapsed || !path)) {
-              e.preventDefault();
-              setIsOpen((prev) => !prev);
-            }
-          }}
+      {/* Use a <button> instead of <div> for native interactivity when hasSub is true */}
+      {hasSub ? (
+        <button
+          type="button" // Explicitly non-submit
+          className={cn(
+            itemClasses,
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sidebar-item-active-icon)] focus-visible:ring-offset-2"
+          )}
+          aria-expanded={isOpen}
+          aria-controls={`submenu-${path}`} // Link to submenu ID for screen readers
+          onClick={handleToggle}
+          onKeyDown={handleKeyDown}
         >
-          {icon && (
-            <span className={iconClasses}>
-              {/* {
-                ...icon, props: { ...(icon.props as any), size: 16 } 
-                } */}
-              {cloneElement(
-                icon as React.ReactElement,
-                {
-                  size: 16,
-                } as {
-                  size: number;
-                }
-              )}
+          <Link
+            href={path || "#"}
+            className="flex items-center gap-3 flex-1"
+            title={sidebarCollapsed ? title : undefined}
+            onClick={(e) => {
+              // Prevent link navigation if it's just a toggle
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            tabIndex={-1} // Make the button the focusable element, not the link
+          >
+            {icon && (
+              <span className={iconClasses}>
+                {cloneElement(
+                  icon as React.ReactElement,
+                  { size: 16 } as { size: number }
+                )}
+              </span>
+            )}
+            {!sidebarCollapsed && (
+              <span className="truncate text-[13px]">{title}</span>
+            )}
+          </Link>
+
+          {!sidebarCollapsed && (
+            <span aria-hidden="true">
+              {" "}
+              {/* Visual indicator, not interactive */}
+              <ChevronDown size={14} className={chevronClasses} />
             </span>
           )}
-          {!sidebarCollapsed && (
-            <span className="truncate text-[13px]">{title}</span>
-          )}
-        </Link>
-
-        {hasSub && !sidebarCollapsed && (
-          <button
-            onClick={handleToggle}
-            className="p-1 hover:bg-black/5 rounded transition-colors"
-            aria-label={`${isOpen ? "Collapse" : "Expand"} ${title}`}
+        </button>
+      ) : (
+        <div className={itemClasses}>
+          <Link
+            href={path || "#"}
+            className="flex items-center gap-3 flex-1"
+            title={sidebarCollapsed ? title : undefined}
           >
-            <ChevronDown size={14} className={chevronClasses} />
-          </button>
-        )}
-      </div>
+            {icon && (
+              <span className={iconClasses}>
+                {cloneElement(
+                  icon as React.ReactElement,
+                  { size: 16 } as { size: number }
+                )}
+              </span>
+            )}
+            {!sidebarCollapsed && (
+              <span className="truncate text-[13px]">{title}</span>
+            )}
+          </Link>
+        </div>
+      )}
 
       {/* Submenu */}
       {hasSub && isOpen && (
-        <div className={submenuClasses}>
+        <div id={`submenu-${path}`} className={submenuClasses}>
           {sub.map((subItem, index) => (
             <SidebarItem
               key={subItem.path || index}

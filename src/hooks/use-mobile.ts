@@ -7,12 +7,12 @@ export function useIsMobile(width = MOBILE_BREAKPOINT): boolean | undefined {
   );
 
   React.useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${width - 1}px)`);
+    const mql = globalThis.matchMedia(`(max-width: ${width - 1}px)`);
     const onChange = () => {
-      setIsMobile(window.innerWidth < width);
+      setIsMobile(globalThis.innerWidth < width);
     };
     mql.addEventListener("change", onChange);
-    setIsMobile(window.innerWidth < width);
+    setIsMobile(globalThis.innerWidth < width);
     return () => mql.removeEventListener("change", onChange);
   }, []);
 
