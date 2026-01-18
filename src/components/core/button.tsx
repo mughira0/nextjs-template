@@ -2,17 +2,19 @@ import buttonBase from "@/baseStyles/buttons.styles";
 import { cn } from "@/helper/generic";
 import { ButtonProps } from "@/types/components/button";
 import { FC, MouseEvent } from "react";
+import Spinner from "./spinner";
 
 const Button: FC<ButtonProps> = ({
   children,
   onClick,
   className = "",
   disabled = false,
-  size = "md",
+  size = "sm",
   variant = "primary",
+  loading = false,
 }) => {
   const sizeConfig = buttonBase.sizes[size] || buttonBase.sizes.md;
-  let variantClass =
+  const variantClass =
     buttonBase.variants[variant] || buttonBase.variants.primary;
 
   const finalClass = cn(
@@ -29,7 +31,7 @@ const Button: FC<ButtonProps> = ({
       disabled={disabled}
       className={finalClass}
     >
-      {children}
+      {loading ? <Spinner size={size} /> : children}
     </button>
   );
 };

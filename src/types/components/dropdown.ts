@@ -1,12 +1,12 @@
-export interface DropdownProps {
-  value?: any;
-  setter?: (value: any) => void;
-  options?: any[];
+export interface DropdownProps<T = any> {
+  value?: T[keyof T] | null;
+  setter?: (value: T[keyof T] | null) => void;
+  options?: T[];
   placeholder?: string;
   label?: string;
   className?: string;
-  optionLabel?: string; // the key in options to display
-  optionValue?: string; // the key in options to use as value
+  optionLabel?: keyof T;
+  optionValue?: keyof T;
   error?: string;
   size?: "sm" | "md" | "lg";
   variant?: "primary" | "secondary" | "error";

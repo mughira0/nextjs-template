@@ -13,7 +13,7 @@ const Input: FC<InputProps> = ({
   label,
   disabled = false,
   error,
-  size = "md",
+  size = "sm",
   variant = "primary",
 }) => {
   const sizeConfig = inputBase.sizes[size] || inputBase.sizes.md;
@@ -32,7 +32,7 @@ const Input: FC<InputProps> = ({
 
   return (
     <div className="flex flex-col w-full">
-      {label && <Label>{label}</Label>}
+      {label && <Label size={size}>{label}</Label>}
 
       <input
         type={type}

@@ -17,13 +17,17 @@ function Example() {
     secondary: "",
     error: "",
   });
-  const [dropdownValue1, setDropdownValue1] = React.useState({
+  const [dropdownValue1, setDropdownValue1] = React.useState<
+    SizeState<string | null>
+  >({
     sm: null,
     md: null,
     lg: null,
   });
 
-  const [dropdownValue2, setDropdownValue2] = React.useState({
+  const [dropdownValue2, setDropdownValue2] = React.useState<
+    VariantState<string | null>
+  >({
     primary: null,
     secondary: null,
     error: null,
@@ -372,3 +376,14 @@ function Example() {
 }
 
 export default Example;
+type SizeState<T> = {
+  sm: T;
+  md: T;
+  lg: T;
+};
+
+type VariantState<T> = {
+  primary: T;
+  secondary: T;
+  error: T;
+};

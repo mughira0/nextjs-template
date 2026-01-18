@@ -42,3 +42,4 @@ const Logo: FC<LogoProps> = memo(({ isMobileView = false, className = "" }) => {
 });
 
 export default Logo;
+Logo.displayName = "Logo";

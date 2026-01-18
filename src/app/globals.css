@@ -20,6 +20,11 @@
 
   --app-bg: oklch(98.5% 0.008 265); /* Very slightly cooler light bg */
 
+  /* font sizes */
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 17px;
+
   /* Fields & buttons – unchanged structure */
   --field-padding-sm: 0.5rem;
   --field-padding-md: 0.75rem;
@@ -58,9 +63,9 @@
 
   --sidebar-item-text: oklch(20% 0.03 260); /* Dark gray for readability */
   --sidebar-item-icon: oklch(35% 0.04 260); /* Medium gray for icons */
-  --sidebar-item-active-text: var(--main-color);
-  --sidebar-item-active-icon: var(--main-color);
-  --sidebar-item-hover-bg: oklch(90% 0.05 200);
+  --sidebar-item-active-text: var(--white-color);
+  --sidebar-item-active-icon: var(--white-color);
+  --sidebar-item-hover-bg: lab(49 -34.47 -14.37);
   --sidebar-item-hover-text: var(--sidebar-item-active-text);
   --sidebar-item-hover-icon: var(--sidebar-item-active-icon);
 
@@ -69,6 +74,9 @@
   --header-shadow: 0 8px 20px oklch(0% 0 0 / 0.07);
   --header-radius: 0.875rem;
   --header-padding: 1rem; /* ← unchanged as requested */
+
+  /* Charts */
+  --chart-bg: oklch(100% 0 0); /* White background for charts */
 }
 
 @media (prefers-color-scheme: dark) {

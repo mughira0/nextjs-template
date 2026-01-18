@@ -1,4 +1,4 @@
-import { MOBILE_BREAKPOINT } from "@/data/dummy";
+import { MOBILE_BREAKPOINT } from "@/data/constants";
 import * as React from "react";
 
 export function useIsMobile(width = MOBILE_BREAKPOINT): boolean | undefined {

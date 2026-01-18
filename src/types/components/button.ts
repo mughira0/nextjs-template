@@ -4,6 +4,7 @@ export interface ButtonProps {
   className?: string;
   disabled?: boolean;
   size?: "sm" | "md" | "lg";
+  loading?: boolean;
   variant?:
     | "primary"
     | "secondary"

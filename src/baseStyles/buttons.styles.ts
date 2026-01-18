@@ -1,6 +1,6 @@
 const baseButtonClasses = [
   "cursor-pointer", // Default cursor
-  "transition-colors duration-200",
+  "transition-colors duration-200 flex items-center justify-center",
 ];
 const buttonBase = {
   sizes: {

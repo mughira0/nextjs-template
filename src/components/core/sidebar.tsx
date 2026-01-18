@@ -9,6 +9,7 @@ import { RoutesInterface, SidebarProps } from "@/types/components/sidebar";
 import Routes from "@/routes";
 import Logo from "./logo";
 import { cn } from "@/helper/generic";
+import { RootState } from "@/redux/store/store";
 
 const isPathActive = (item: RoutesInterface, pathname: string): boolean => {
   // Direct match
@@ -48,7 +49,9 @@ const getExpandedPaths = (
 const Sidebar: FC<SidebarProps> = ({ isMobileView }) => {
   const pathname = usePathname();
   const dispatch = useDispatch();
-  const { sidebarCollapsed } = useSelector((state: any) => state.commonReducer);
+  const { sidebarCollapsed } = useSelector(
+    (state: RootState) => state.commonReducer
+  );
 
   // Calculate which items should be expanded on mount and pathname change
   const expandedPaths = useMemo(
@@ -121,12 +124,14 @@ const SidebarItem: FC<SidebarItemProps> = ({
 
   // Initialize open state based on whether this path should be expanded
   const [isOpen, setIsOpen] = useState(() => expandedPaths.has(path));
-
-  // Update open state when pathname changes
-  useEffect(() => {
+  const handleChangeExpand = () => {
     if (expandedPaths.has(path)) {
       setIsOpen(true);
     }
+  };
+  // Update open state when pathname changes
+  useEffect(() => {
+    handleChangeExpand();
   }, [expandedPaths, path]);
 
   const handleToggle = () => {
@@ -145,7 +150,7 @@ const SidebarItem: FC<SidebarItemProps> = ({
   const itemClasses = cn(
     "flex items-center justify-between gap-3 p-2 rounded-md cursor-pointer text-sm transition-all duration-200 group",
     isActive
-      ? "bg-[var(--sidebar-item-hover-bg)] text-[var(--sidebar-item-active-text)]"
+      ? "bg-[var(--sidebar-item-hover-bg)] text-[var(--sidebar-item-active-text)] my-1"
       : "text-[var(--sidebar-item-text)] hover:bg-[var(--sidebar-item-hover-bg)] hover:text-[var(--sidebar-item-hover-text)]"
   );
 

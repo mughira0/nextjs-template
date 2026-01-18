@@ -3,11 +3,14 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { SidebarSkeletonProps } from "@/types/components/sidebar";
 import { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Sidebar from "./sidebar";
 import Header from "./header";
+import Sidebar from "./sidebar";
+import { RootState } from "@/redux/store/store";
 
 const SidebarSkeleton: FC<SidebarSkeletonProps> = ({ children }) => {
-  const { sidebarCollapsed } = useSelector((state: any) => state.commonReducer);
+  const { sidebarCollapsed } = useSelector(
+    (state: RootState) => state.commonReducer
+  );
   const isMobile = useIsMobile();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
@@ -16,10 +19,13 @@ const SidebarSkeleton: FC<SidebarSkeletonProps> = ({ children }) => {
     : "var(--sidebar-expanded-width)";
 
   // Close mobile sidebar when switching to desktop
-  useEffect(() => {
+  const handleSIdebarOpnen = () => {
     if (!isMobile) {
       setMobileSidebarOpen(false);
     }
+  };
+  useEffect(() => {
+    handleSIdebarOpnen();
   }, [isMobile]);
 
   // Prevent body scroll when mobile sidebar is open

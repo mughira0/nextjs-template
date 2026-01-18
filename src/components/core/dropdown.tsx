@@ -4,29 +4,32 @@ import { DropdownProps } from "@/types/components/dropdown";
 import { FC } from "react";
 import Select, { SingleValue, StylesConfig } from "react-select";
 import Label from "./label";
-const Dropdown: FC<DropdownProps> = ({
+const Dropdown = <T,>({
   value,
   setter,
   options = [],
   placeholder = "Select an option",
   label = "",
   className = "",
-  optionLabel = "label",
-  optionValue = "value",
+  optionLabel = "label" as keyof T,
+  optionValue = "value" as keyof T,
   error,
   size = "md",
   variant = "primary",
   disabled = false,
   isSearchable = false,
-}) => {
-  const handleChange = (selected: SingleValue<any>) => {
-    if (setter) setter(selected ? selected[optionValue] : null);
+}: DropdownProps<T>) => {
+  const handleChange = (
+    selected: SingleValue<{ label: string; value: T[keyof T] }>
+  ) => {
+    if (setter) setter(selected ? selected.value : null);
   };
 
-  const mappedOptions = options.map((opt) => ({
-    label: opt[optionLabel],
-    value: opt[optionValue],
-  }));
+  const mappedOptions =
+    options?.map((opt) => ({
+      label: String(opt[optionLabel!]),
+      value: opt[optionValue!],
+    })) || [];
 
   const selectedOption =
     mappedOptions.find((opt) => opt.value === value) || null;
@@ -38,7 +41,10 @@ const Dropdown: FC<DropdownProps> = ({
     : dropdownBase.variants[variant] || dropdownBase.variants.primary;
 
   // Custom styles for react-select
-  const customStyles: StylesConfig<any, false> = {
+  const customStyles: StylesConfig<
+    { label: string; value: T[keyof T] },
+    false
+  > = {
     control: (provided, state) => ({
       ...provided,
       borderColor: variantConfig.borderColor,
