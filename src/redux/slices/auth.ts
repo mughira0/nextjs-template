@@ -1,7 +1,7 @@
-import { AuthState, User } from "@/types/system/slice";
+import { IAuthState, IUser } from "@/types/system/slice";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: AuthState = {
+const initialState: IAuthState = {
   user: null,
   isLogin: false,
   unreadCount: 0,
@@ -14,7 +14,7 @@ const authSlice = createSlice({
   reducers: {
     saveLoginUserData(
       state,
-      action: PayloadAction<{ user: User; token: string }>
+      action: PayloadAction<{ user: IUser; token: string }>,
     ) {
       state.user = action.payload.user;
       state.access_token = action.payload.token;
@@ -25,7 +25,7 @@ const authSlice = createSlice({
       state.access_token = null;
       state.isLogin = false;
     },
-    updateUser(state, action: PayloadAction<User>) {
+    updateUser(state, action: PayloadAction<IUser>) {
       state.user = { ...action.payload };
     },
     updateToken(state, action: PayloadAction<string>) {

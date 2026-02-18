@@ -1,11 +1,12 @@
+import { Box } from "@/components/core/box";
+import ChatLayout from "@/components/core/chat";
 import SidebarSkeleton from "@/components/core/sidebarSkeleton";
-import RenderChat from "@/components/core/chat";
 import React from "react";
 
 function Chat() {
   return (
     <SidebarSkeleton>
-      <RenderChat />
+      <ChatLayout />
     </SidebarSkeleton>
   );
 }

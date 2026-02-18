@@ -2,7 +2,7 @@
 
 import React, { CSSProperties, ReactNode } from "react";
 
-interface TableHeader {
+export interface TableHeader {
   label: string;
   key: string;
   align?: "left" | "center" | "right";

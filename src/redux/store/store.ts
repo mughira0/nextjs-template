@@ -3,6 +3,7 @@ import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
 import authReducer from "../slices/auth";
 import commonReducer from "../slices/common";
+import chatReducer from "../slices/chat";
 
 import {
   FLUSH,
@@ -20,6 +21,7 @@ import {
 const rootReducer = combineReducers({
   authReducer,
   commonReducer,
+  chatReducer,
 });
 
 // ==================
@@ -30,7 +32,7 @@ const persistConfig: import("redux-persist").PersistConfig<
 > = {
   key: "root",
   storage,
-  whitelist: ["authReducer"],
+  whitelist: ["authReducer", "chatReducer"],
 };
 
 // ==================

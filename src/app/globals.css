@@ -14,6 +14,7 @@
   --primary-text-color: oklch(18% 0.02 260); /* Very dark gray (almost black) */
   --white-color: oklch(100% 0 0);
   --secondary-text-color: oklch(45% 0.03 260); /* Medium-dark gray */
+  --card: oklch(1 0 0); /* default white-ish */
 
   --radius: 0.625rem;
   --global-radius: 5px;
@@ -77,6 +78,22 @@
 
   /* Charts */
   --chart-bg: oklch(100% 0 0); /* White background for charts */
+
+  /* Chat */
+  --chat-bg: rgb(255, 255, 255);
+  --chat-sidebar-bg: rgb(249, 250, 251);
+  --chat-border: rgb(229, 231, 235);
+
+  --chat-primary: rgb(79, 70, 229);
+
+  --chat-text-main: rgb(17, 24, 39);
+  --chat-text-muted: rgb(107, 114, 128);
+
+  --chat-room-hover: rgb(243, 244, 246);
+  --chat-room-active: var(--main-color);
+  --chat-text-active: rgb(255, 255, 255);
+  /* Chat height */
+  --chat-height: calc(100%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -124,4 +141,41 @@
 
 .scrollbar-none::-webkit-scrollbar {
   display: none;
+}
+/* ==============================
+   Themed Scrollbar
+   ============================== */
+.scrollbar-themed {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--primary-color) var(--card); /* Firefox */
+}
+
+/* WebKit browsers */
+.scrollbar-themed::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.scrollbar-themed::-webkit-scrollbar-track {
+  background: var(--card);
+  border-radius: var(--radius);
+}
+
+.scrollbar-themed::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: var(--radius);
+  border: 2px solid var(--card); /* adds padding effect */
+}
+
+.scrollbar-themed::-webkit-scrollbar-thumb:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Optional: dark mode variant */
+.dark .scrollbar-themed::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+.dark .scrollbar-themed::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
 }
