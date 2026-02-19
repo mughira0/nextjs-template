@@ -6,7 +6,7 @@ import Button from "@/components/core/button";
 import Input from "@/components/core/input";
 import { baseUrl } from "@/data/constants";
 import { handleSignin } from "@/helper/auth";
-import { User } from "@/types/system/slice";
+import { IUser } from "@/types/system/slice";
 
 // Constants
 const LOADIN_STATE = {
@@ -23,7 +23,7 @@ type LoadingState = (typeof LOADIN_STATE)[keyof typeof LOADIN_STATE] | false;
 interface LoginData {
   data: {
     token: string;
-    user: User;
+    user: IUser;
   };
   success: boolean;
 }

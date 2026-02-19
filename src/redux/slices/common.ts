@@ -1,7 +1,7 @@
-import { CommonState } from "@/types/system/slice";
+import { ICommonState } from "@/types/system/slice";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: CommonState = {
+const initialState: ICommonState = {
   sidebarCollapsed: false,
 };
 

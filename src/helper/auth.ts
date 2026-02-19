@@ -5,7 +5,7 @@ import { CookieOptions } from "@/types/system/cookies";
 import { COOKIES_KEYS, SECRET_KEY } from "@/data/constants";
 import { dispatchFromStore } from "@/redux/store/store";
 import { logoutUser, saveLoginUserData } from "@/redux/slices/auth";
-import { User } from "@/types/system/slice";
+import { IUser } from "@/types/system/slice";
 const handleEncryption = (value: string | null | undefined): string | null => {
   if (!value) return null;
   return CryptoJS.AES.encrypt(value, SECRET_KEY).toString();
@@ -13,7 +13,7 @@ const handleEncryption = (value: string | null | undefined): string | null => {
 
 // Decrypt
 export const handleDecryption = (
-  cipherText: string | null | undefined
+  cipherText: string | null | undefined,
 ): string | null => {
   if (!cipherText) return null;
   try {
@@ -30,7 +30,7 @@ export const handleDecryption = (
 const setEncryptedCookie = (
   key: string,
   value: string | null | undefined,
-  options: CookieOptions = {}
+  options: CookieOptions = {},
 ): void => {
   const encrypted = handleEncryption(value);
   if (!encrypted) return;
@@ -45,10 +45,10 @@ const setEncryptedCookie = (
 
 // Signin
 export const handleSignin = (
-  response: { user: User; token: string },
+  response: { user: IUser; token: string },
   router: AppRouterInstance, // Next.js App Router
   // router: NavigateFunction,     // Uncomment if using React Router
-  redirect: string | null = null
+  redirect: string | null = null,
 ): void => {
   console.log("Signin response:", response);
   const { token: accessToken } = response;
@@ -68,7 +68,7 @@ export const handleSignin = (
 // Signout
 export const handleSignout = (
   redirect: string = "/auth/login",
-  router: AppRouterInstance // Adjust type if using different router
+  router: AppRouterInstance, // Adjust type if using different router
 ): void => {
   Object.values(COOKIES_KEYS).forEach((key) => Cookies.remove(key));
 
