@@ -1,3 +1,5 @@
+import { CHAT_VIEW_STATE } from "@/data/usage";
+
 export interface IAuthState {
   user: IUser | null;
   isLogin: boolean;
@@ -11,9 +13,10 @@ export interface IUser {
   _id: string;
   name: string;
   email?: string;
+  isOnline?: boolean;
   role: string | null;
   phone?: string;
-  photo?: string;
+  photo?: string | null;
 }
 
 export interface IMessage {
@@ -21,7 +24,7 @@ export interface IMessage {
   roomId: string;
   senderId: string;
   text: string;
-  attachments: string[];
+  attachments?: string[];
   to: string[];
   from: IUser;
   createdAt: string;
@@ -39,4 +42,5 @@ export interface IRoom {
 export interface IChatState {
   activeRoomId: string | null;
   unreadCount: number;
+  chatView: string;
 }

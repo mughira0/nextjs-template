@@ -24,3 +24,8 @@ export const SOCKET_EVENTS = {
     CONNECT_ERROR: "connect_error",
   },
 };
+export const CHAT_VIEW_STATE = {
+  EXPAND: "expand",
+  ROOMS: "rooms",
+  CHAT: "chat",
+};

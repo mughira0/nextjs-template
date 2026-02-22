@@ -80,6 +80,16 @@ const buttonBase = {
       "disabled:opacity-50",
       "disabled:cursor-not-allowed",
     ].join(" "),
+    ghost: [
+      ...baseButtonClasses,
+      "bg-transparent",
+      "text-[var(--main-color)]",
+      "border-[1px]",
+      "border-[var(--field-border)]",
+      "rounded-[var(--btn-radius)]",
+      "disabled:opacity-50",
+      "disabled:cursor-not-allowed",
+    ].join(" "),
   },
   focus: [
     "outline-none",

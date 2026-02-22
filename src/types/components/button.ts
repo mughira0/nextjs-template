@@ -11,5 +11,6 @@ export interface ButtonProps {
     | "danger"
     | "primary-bordered"
     | "secondary-bordered"
-    | "danger-bordered";
+    | "danger-bordered"
+    | "ghost";
 }

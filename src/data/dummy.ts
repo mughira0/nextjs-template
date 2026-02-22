@@ -9,6 +9,7 @@ export const users: IUser[] = [
     role: "admin",
     phone: "+92 335 266 8377",
     photo: "/images/user3.png", // confident man in blazer, tech background
+    isOnline: true,
   },
   {
     _id: "u2",
@@ -305,3 +306,13 @@ export const roomsData: IRoom[] = [
     lastMessage: messages.find((m) => m._id === "m7") || null, // rate-limit update as casual share
   },
 ];
+
+export const meUser = {
+  _id: "u5",
+  name: "Me Khan",
+  email: "Me@techcorp.com",
+  role: "admin",
+  phone: "+92 335 266 8377",
+  photo: "/images/user3.png", // confident man in blazer, tech background
+  isOnline: true,
+}; // Mughira as the current user for demo purposes

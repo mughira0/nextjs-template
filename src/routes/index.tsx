@@ -1,5 +1,5 @@
 import { RoutesInterface } from "@/types/components/sidebar";
-import { File, Home } from "lucide-react";
+import { File, Home, MessageCircleMore } from "lucide-react";
 
 const Routes: RoutesInterface[] = [
   {
@@ -39,9 +39,9 @@ const Routes: RoutesInterface[] = [
   },
 
   {
-    title: "Users",
-    path: "/users",
-    icon: <File />,
+    title: "Chat",
+    path: "/chat",
+    icon: <MessageCircleMore />,
   },
 ];
 

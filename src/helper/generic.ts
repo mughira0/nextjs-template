@@ -36,10 +36,12 @@ export const generateAvatarProps = (user: IUser) => {
   const fallback = getFirstCharacter(user.name || user.email || "U");
   const src = imageUrl(user?.photo || "");
   const alt = user.name || user.email || "User Avatar";
+  const isOnline = user.isOnline || false;
   return {
     src,
     alt,
     fallback,
+    isOnline,
   };
 };
 

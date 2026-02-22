@@ -22,7 +22,7 @@ const Button: FC<ButtonProps> = ({
     sizeConfig.font,
     variantClass,
     buttonBase.focus,
-    className
+    className,
   );
 
   return (

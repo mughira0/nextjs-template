@@ -2,7 +2,7 @@ import { ICommonState } from "@/types/system/slice";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: ICommonState = {
-  sidebarCollapsed: false,
+  sidebarCollapsed: true,
 };
 
 const commonSlice = createSlice({

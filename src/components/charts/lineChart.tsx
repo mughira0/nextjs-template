@@ -22,7 +22,7 @@ ChartJS.register(
   LineElement,
   Tooltip,
   Legend,
-  Filler
+  Filler,
 );
 
 const LineChartComponent = ({
@@ -70,7 +70,7 @@ const LineChartComponent = ({
             0,
             chartArea.top,
             0,
-            chartArea.bottom
+            chartArea.bottom,
           );
 
           const topColor = ds.backgroundColor ?? hexToRgba(borderColor, 0.35);
@@ -121,7 +121,7 @@ const LineChartComponent = ({
 
   return (
     <div
-      className={`relative w-full rounded-xl bg-[${backgroundColor}] p-4 shadow ${className}`}
+      className={`relative w-full rounded-xl bg-[${backgroundColor}]   ${className}`}
       style={{ height }}
     >
       <Line data={data} options={options} />

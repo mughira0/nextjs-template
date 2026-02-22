@@ -1,8 +1,9 @@
+import { meUser } from "@/data/dummy";
 import { IAuthState, IUser } from "@/types/system/slice";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IAuthState = {
-  user: null,
+  user: meUser,
   isLogin: false,
   unreadCount: 0,
   access_token: null,

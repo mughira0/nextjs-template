@@ -55,7 +55,7 @@ const request = async <T = any>(
   url: string,
   data: any = null,
   accessToken: string | null = null,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = {},
 ): Promise<ApiResult<T>> => {
   const isFormData = data instanceof FormData;
   const headers = createHeaders(accessToken, isFormData);
@@ -94,33 +94,33 @@ const request = async <T = any>(
 export const Get = <T = any>(
   url: string,
   accessToken: string | null = null,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = {},
 ): Promise<ApiResult<T>> => request<T>("get", url, null, accessToken, config);
 
 export const Post = <T = any>(
   url: string,
   data: any = null,
   accessToken: string | null = null,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = {},
 ): Promise<ApiResult<T>> => request<T>("post", url, data, accessToken, config);
 
 export const Patch = <T = any>(
   url: string,
   data: any = null,
   accessToken: string | null = null,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = {},
 ): Promise<ApiResult<T>> => request<T>("patch", url, data, accessToken, config);
 
 export const Put = <T = any>(
   url: string,
   data: any = null,
   accessToken: string | null = null,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = {},
 ): Promise<ApiResult<T>> => request<T>("put", url, data, accessToken, config);
 
 export const Delete = <T = any>(
   url: string,
   accessToken: string | null = null,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = {},
 ): Promise<ApiResult<T>> =>
   request<T>("delete", url, null, accessToken, config);

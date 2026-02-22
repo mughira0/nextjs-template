@@ -3,7 +3,7 @@ export const COOKIES_KEYS = {
   Role: "__xypd_role__" as const,
 };
 export const SECRET_KEY = "xypd";
-export const MOBILE_BREAKPOINT = 768;
+export const MOBILE_BREAKPOINT = 1025;
 
 export const API_BASE_URL = "http://localhost:5000/api/v1";
 export const SOCKET_BASE_URL = "http://localhost:5000";

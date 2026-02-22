@@ -1,9 +1,11 @@
+import { CHAT_VIEW_STATE } from "@/data/usage";
 import { IChatState } from "@/types/system/slice";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IChatState = {
   activeRoomId: null,
   unreadCount: 0,
+  chatView: CHAT_VIEW_STATE.EXPAND,
 };
 
 const chatSlice = createSlice({
@@ -16,13 +18,25 @@ const chatSlice = createSlice({
     updateUnreadCount(state, action: PayloadAction<number>) {
       state.unreadCount = action.payload;
     },
+    setChatView(
+      state,
+      action: PayloadAction<
+        (typeof CHAT_VIEW_STATE)[keyof typeof CHAT_VIEW_STATE]
+      >,
+    ) {
+      state.chatView = action.payload;
+    },
     clearChatState() {
       return initialState;
     },
   },
 });
 
-export const { setActiveRoomId, updateUnreadCount, clearChatState } =
-  chatSlice.actions;
+export const {
+  setActiveRoomId,
+  updateUnreadCount,
+  setChatView,
+  clearChatState,
+} = chatSlice.actions;
 
 export default chatSlice.reducer;

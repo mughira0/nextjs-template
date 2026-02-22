@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 /* =======================
-   Root Variables
-   ======================= */
+    Root Variables
+    ======================= */
 :root {
   /* Core brand & text */
   --main-color: oklch(
-    68.75% 0.11338 194.878
+    27.778% 0.1179 265.65
   ); /* Richer, more vibrant teal/cyan */
   --background-color: oklch(99% 0.002 260); /* Cleaner near-white */
   --primary-color: var(--main-color);
@@ -57,7 +57,7 @@
   --sidebar-expanded-width: 200px;
 
   /* New harmonious sidebar colors – soft blue-gray with subtle warmth */
-  --sidebar-bg: oklch(88.056% 0.05237 196.347); /* Very light cool gray-blue */
+  --sidebar-bg: oklch(80.826% 0.10884 234.218); /* Very light cool gray-blue */
   --sidebar-border: oklch(85% 0.04 255); /* Gentle mid-tone border */
   --sidebar-shadow: 0 10px 25px oklch(0% 0 0 / 0.08); /* Softer, modern shadow */
   --sidebar-radius: 0.875rem; /* Slightly rounder for elegance */
@@ -66,7 +66,9 @@
   --sidebar-item-icon: oklch(35% 0.04 260); /* Medium gray for icons */
   --sidebar-item-active-text: var(--white-color);
   --sidebar-item-active-icon: var(--white-color);
-  --sidebar-item-hover-bg: lab(49 -34.47 -14.37);
+  --sidebar-item-hover-bg: var(
+    --main-color
+  ); /* Use main color for hover background */
   --sidebar-item-hover-text: var(--sidebar-item-active-text);
   --sidebar-item-hover-icon: var(--sidebar-item-active-icon);
 
@@ -79,21 +81,30 @@
   /* Charts */
   --chart-bg: oklch(100% 0 0); /* White background for charts */
 
-  /* Chat */
-  --chat-bg: rgb(255, 255, 255);
-  --chat-sidebar-bg: rgb(249, 250, 251);
-  --chat-border: rgb(229, 231, 235);
+  /* ==================== CHAT ==================== */
+  --chat-bg: oklch(100% 0 0);
+  --chat-sidebar-bg: var(--chat-bg);
+  --chat-header-bg: oklch(100% 0 0);
+  --chat-border: oklch(90% 0.01 260);
 
-  --chat-primary: rgb(79, 70, 229);
-
-  --chat-text-main: rgb(17, 24, 39);
-  --chat-text-muted: rgb(107, 114, 128);
-
-  --chat-room-hover: rgb(243, 244, 246);
+  --chat-room-hover: oklch(96% 0.01 260);
   --chat-room-active: var(--main-color);
-  --chat-text-active: rgb(255, 255, 255);
-  /* Chat height */
-  --chat-height: calc(100%);
+  --chat-text-main: oklch(18% 0.02 260);
+  --chat-text-muted: oklch(50% 0.02 260);
+  --chat-text-active: oklch(100% 0 0);
+
+  --chat-input-bg: oklch(98% 0.005 260);
+  --chat-message-own-bg: var(--main-color);
+  --chat-message-other-bg: oklch(96% 0.01 260);
+  --chat-message-own-text: oklch(100% 0 0);
+  --chat-message-other-text: oklch(22% 0.02 260);
+
+  --chat-radius: 0.75rem;
+  --chat-radius-sm: 0.5rem;
+  --chat-spacing: 0.75rem;
+  --chat-header-height: 4rem;
+  --chat-input-height: 4.5rem;
+  --chat-height: calc(100vh - 100px);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -104,8 +115,8 @@
 }
 
 /* =======================
-   Base Styles
-   ======================= */
+    Base Styles
+    ======================= */
 @layer base {
   * {
     box-sizing: border-box;
@@ -119,8 +130,8 @@
 }
 
 /* =======================
-   Text Utilities
-   ======================= */
+    Text Utilities
+    ======================= */
 .line-clamp {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -143,8 +154,8 @@
   display: none;
 }
 /* ==============================
-   Themed Scrollbar
-   ============================== */
+    Themed Scrollbar
+    ============================== */
 .scrollbar-themed {
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: var(--primary-color) var(--card); /* Firefox */
@@ -157,7 +168,7 @@
 }
 
 .scrollbar-themed::-webkit-scrollbar-track {
-  background: var(--card);
+  background: transparent;
   border-radius: var(--radius);
 }
 
@@ -167,13 +178,9 @@
   border: 2px solid var(--card); /* adds padding effect */
 }
 
-.scrollbar-themed::-webkit-scrollbar-thumb:hover {
-  background-color: var(--secondary-color);
-}
-
 /* Optional: dark mode variant */
 .dark .scrollbar-themed::-webkit-scrollbar-track {
-  background: var(--background-color);
+  background: transparent;
 }
 
 .dark .scrollbar-themed::-webkit-scrollbar-thumb {

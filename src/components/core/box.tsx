@@ -14,7 +14,7 @@ export const Box = React.forwardRef<HTMLDivElement, BoxProps>(
       <div
         ref={ref}
         className={cn(
-          "bg-card shadow-md rounded-[var(--field-radius)]",
+          "bg-[var(--card)] p-3 shadow-md rounded-[var(--field-radius)]",
           className,
         )}
         {...props}
