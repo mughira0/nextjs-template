@@ -8,7 +8,7 @@ import PieChartComponent from "@/components/charts/PieChart";
 import RadarChartComponent from "@/components/charts/RadarChart";
 import ScatterChartComponent from "@/components/charts/ScatterChart";
 import { Box } from "@/components/core/box";
-import SidebarSkeleton from "@/components/core/sidebarSkeleton";
+import SidebarSkeleton from "@/components/core/sidebar-skeleton";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -58,7 +58,7 @@ interface CardProps {
 const Card = ({ title, badge, children }: CardProps) => (
   <Box>
     <div className="flex items-center justify-between mb-5">
-      <span className="text-[0.95rem] font-semibold text-slate-900">
+      <span className="text-[0.95rem] font-semibold text-primary-900">
         {title}
       </span>
       <span className="font-mono text-[0.7rem] bg-blue-50 text-blue-600 border border-blue-200 rounded-md px-2 py-0.5">
@@ -75,21 +75,20 @@ export default function ChartLibraryPreview() {
     <SidebarSkeleton>
       {/* Header */}
       <header className="text-center mb-12">
-        <h1 className="text-3xl font-semibold tracking-tight text-slate-900">
+        <h1 className="text-3xl font-semibold  text-primary">
           Chart Component Library
         </h1>
-        <p className="text-slate-500 mt-2 text-[0.95rem]">
+        <p className="text-secondary text-[0.95rem]">
           All chart types — consistent props structure, built on Chart.js
         </p>
       </header>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
         {/* ── LINE ── */}
         <Card title="Line Chart" badge="LineChartComponent">
           <LineChartComponent
             height={260}
-            backgroundColor="#ffffff"
             showLegend={false}
             labels={MONTHS}
             fill={false}
@@ -110,7 +109,6 @@ export default function ChartLibraryPreview() {
         <Card title="Area Chart" badge="LineChartComponent fill">
           <LineChartComponent
             height={260}
-            backgroundColor="#ffffff"
             showLegend={false}
             labels={MONTHS}
             fill={true}
@@ -131,7 +129,6 @@ export default function ChartLibraryPreview() {
         <Card title="Multi-Line Chart" badge="LineChartComponent datasets[]">
           <LineChartComponent
             height={260}
-            backgroundColor="#ffffff"
             labels={MONTHS}
             fill={true}
             datasets={[
@@ -159,7 +156,6 @@ export default function ChartLibraryPreview() {
         <Card title="Vertical Bar" badge="BarChartComponent">
           <BarChartComponent
             height={260}
-            backgroundColor="#ffffff"
             showLegend={false}
             labels={MONTHS}
             datasets={[
@@ -180,7 +176,6 @@ export default function ChartLibraryPreview() {
         >
           <BarChartComponent
             height={260}
-            backgroundColor="#ffffff"
             showLegend={false}
             orientation="horizontal"
             labels={["Apples", "Bananas", "Oranges", "Grapes", "Mangoes"]}
@@ -199,7 +194,6 @@ export default function ChartLibraryPreview() {
         <Card title="Multi Bar (Grouped)" badge="BarChartComponent datasets[]">
           <BarChartComponent
             height={260}
-            backgroundColor="#ffffff"
             labels={["Q1", "Q2", "Q3", "Q4"]}
             datasets={[
               {
@@ -222,7 +216,6 @@ export default function ChartLibraryPreview() {
         <Card title="Stacked Bar" badge="BarChartComponent stacked">
           <BarChartComponent
             height={260}
-            backgroundColor="#ffffff"
             stacked={true}
             labels={["Q1", "Q2", "Q3", "Q4"]}
             datasets={[
@@ -250,7 +243,6 @@ export default function ChartLibraryPreview() {
         <Card title="Pie Chart" badge="PieChartComponent">
           <PieChartComponent
             height={260}
-            backgroundColor="#ffffff"
             labels={["Direct", "Organic", "Referral", "Social", "Email"]}
             data={[35, 25, 20, 12, 8]}
             backgroundColors={COLORS.slice(0, 5)}
@@ -263,7 +255,6 @@ export default function ChartLibraryPreview() {
         <Card title="Donut Chart" badge="DonutChartComponent">
           <DonutChartComponent
             height={260}
-            backgroundColor="#ffffff"
             cutoutPercent={62}
             centerValue="62%"
             centerLabel="Chrome"
@@ -279,7 +270,6 @@ export default function ChartLibraryPreview() {
         <Card title="Radar / Spider" badge="RadarChartComponent">
           <RadarChartComponent
             height={260}
-            backgroundColor="#ffffff"
             maxValue={100}
             labels={["Speed", "Design", "SEO", "UX", "Performance", "Security"]}
             datasets={[
@@ -305,7 +295,6 @@ export default function ChartLibraryPreview() {
         <Card title="Scatter Plot" badge="ScatterChartComponent">
           <ScatterChartComponent
             height={260}
-            backgroundColor="#ffffff"
             datasets={[
               {
                 label: "Group A",
@@ -333,7 +322,6 @@ export default function ChartLibraryPreview() {
         <Card title="Bubble Chart" badge="BubbleChartComponent">
           <BubbleChartComponent
             height={260}
-            backgroundColor="#ffffff"
             datasets={[
               {
                 label: "Series A",

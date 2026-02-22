@@ -5,10 +5,8 @@
     ======================= */
 :root {
   /* Core brand & text */
-  --main-color: oklch(
-    27.778% 0.1179 265.65
-  ); /* Richer, more vibrant teal/cyan */
-  --background-color: oklch(99% 0.002 260); /* Cleaner near-white */
+  --main-color: oklch(0.62 0.22 275); /* Richer, more vibrant teal/cyan */
+  --background-color: oklch(0.97 0.01 285); /* Cleaner near-white */
   --primary-color: var(--main-color);
   --secondary-color: oklch(40% 0.18 262); /* Deep indigo-blue with life */
   --primary-text-color: oklch(18% 0.02 260); /* Very dark gray (almost black) */
@@ -52,42 +50,40 @@
   --danger-border: oklch(68% 0.28 28); /* Vibrant red */
   --danger-color: oklch(52% 0.28 28);
 
-  /* ==================== SIDEBAR (much better now) ==================== */
+  /* ==================== SIDEBAR ==================== */
   --sidebar-collapsed-width: 80px;
   --sidebar-expanded-width: 200px;
 
-  /* New harmonious sidebar colors – soft blue-gray with subtle warmth */
-  --sidebar-bg: oklch(80.826% 0.10884 234.218); /* Very light cool gray-blue */
-  --sidebar-border: oklch(85% 0.04 255); /* Gentle mid-tone border */
-  --sidebar-shadow: 0 10px 25px oklch(0% 0 0 / 0.08); /* Softer, modern shadow */
-  --sidebar-radius: 0.875rem; /* Slightly rounder for elegance */
+  --sidebar-bg: oklch(1 0 0);
+  --sidebar-border: oklch(85% 0.04 255);
+  --sidebar-shadow: 0 10px 25px oklch(0% 0 0 / 0.08);
+  --sidebar-radius: 0.875rem;
 
-  --sidebar-item-text: oklch(20% 0.03 260); /* Dark gray for readability */
-  --sidebar-item-icon: oklch(35% 0.04 260); /* Medium gray for icons */
+  --sidebar-item-text: oklch(20% 0.03 260);
+  --sidebar-item-icon: oklch(35% 0.04 260);
   --sidebar-item-active-text: var(--white-color);
   --sidebar-item-active-icon: var(--white-color);
-  --sidebar-item-hover-bg: var(
-    --main-color
-  ); /* Use main color for hover background */
+  --sidebar-item-active-bg: var(--main-color);
+  --sidebar-item-hover-bg: oklch(61.284% 0.2108 275.292 / 0.37);
   --sidebar-item-hover-text: var(--sidebar-item-active-text);
   --sidebar-item-hover-icon: var(--sidebar-item-active-icon);
 
-  --header-bg: var(--sidebar-bg); /* Tiny bit lighter than sidebar */
+  --header-bg: var(--sidebar-bg);
   --header-border: oklch(84% 0.045 255);
-  --header-shadow: 0 8px 20px oklch(0% 0 0 / 0.07);
+  --header-shadow: 0 8px 28px oklch(0% 0 0 / 0.07);
   --header-radius: 0.875rem;
-  --header-padding: 1rem; /* ← unchanged as requested */
+  --header-padding: 1rem;
 
   /* Charts */
-  --chart-bg: oklch(100% 0 0); /* White background for charts */
+  --chart-bg: oklch(100% 0 0);
 
   /* ==================== CHAT ==================== */
-  --chat-bg: oklch(100% 0 0);
+  --chat-bg: var(--sidebar-bg);
   --chat-sidebar-bg: var(--chat-bg);
   --chat-header-bg: oklch(100% 0 0);
-  --chat-border: oklch(90% 0.01 260);
+  --chat-border: var(--field-border);
 
-  --chat-room-hover: oklch(96% 0.01 260);
+  --chat-room-hover: var(--sidebar-item-hover-bg);
   --chat-room-active: var(--main-color);
   --chat-text-main: oklch(18% 0.02 260);
   --chat-text-muted: oklch(50% 0.02 260);
@@ -105,15 +101,120 @@
   --chat-header-height: 4rem;
   --chat-input-height: 4.5rem;
   --chat-height: calc(100vh - 100px);
+
+  --popper-bg: var(--field-bg);
+  --popper-border: var(--field-border);
+  --popper-text: var(--primary-text-color);
+  --popper-hover: var(--main-color);
+  --popper-selected: oklch(35% 0.28 28);
+  --popper-ring: oklch(45% 0.38 28);
+  --popper-placeholder: oklch(42% 0.02 260);
+  --popper-shadow: rgba(172, 172, 172, 0.4);
+
+  /*  Toggle Light Dark */
+  --toggle-width: 56px;
+  --toggle-height: 28px;
+  --toggle-thumb-size: 22px;
+  --toggle-thumb-offset: 3px;
+  --toggle-transition: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --toggle-track-light: oklch(88% 0.03 260);
+  --toggle-track-dark: oklch(25% 0.03 265);
+  --toggle-track-border-light: oklch(78% 0.03 260);
+  --toggle-track-border-dark: oklch(35% 0.04 265);
+
+  --toggle-thumb-light: oklch(100% 0 0);
+  --toggle-thumb-dark: oklch(72% 0.18 275);
+  --toggle-thumb-shadow-light: 0 1px 4px oklch(0% 0 0 / 0.18);
+  --toggle-thumb-shadow-dark:
+    0 1px 6px oklch(0% 0 0 / 0.45), 0 0 10px oklch(0.62 0.22 275 / 0.3);
+
+  --toggle-icon-light: oklch(65% 0.18 60);
+  --toggle-icon-dark: oklch(22% 0.04 265);
+
+  --toggle-star-color: oklch(90% 0.02 260);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: oklch(8% 0.005 260); /* former #0a0a0a */
-    --foreground-color: oklch(92% 0.005 260); /* former #ededed */
-  }
-}
+.dark {
+  /* Core brand & text */
+  --main-color: oklch(
+    0.65 0.22 275
+  ); /* slightly lighter for dark bg contrast */
+  --background-color: oklch(12% 0.008 265);
+  --primary-color: var(--main-color);
+  --secondary-color: oklch(55% 0.18 262);
+  --primary-text-color: oklch(92% 0.01 260);
+  --white-color: oklch(100% 0 0);
+  --secondary-text-color: oklch(68% 0.02 260);
+  --card: oklch(18% 0.01 265);
 
+  --app-bg: oklch(11% 0.008 265);
+
+  /* Fields & buttons */
+  --field-border: oklch(30% 0.02 260);
+  --field-color: oklch(90% 0.01 260);
+  --field-bg: oklch(0.23 0.04 264);
+
+  /* Input specific */
+  --input-border: var(--field-border);
+  --input-color: var(--field-color);
+  --placeholder-color: oklch(48% 0.02 260);
+
+  --secondary-border: oklch(32% 0.02 260);
+  --secondary-color: oklch(75% 0.02 260);
+
+  --danger-border: oklch(55% 0.28 28);
+  --danger-color: oklch(65% 0.28 28);
+
+  /* ==================== SIDEBAR ==================== */
+  --sidebar-bg: oklch(0.23 0.04 264);
+  --sidebar-border: oklch(25% 0.02 260);
+  --sidebar-shadow: 0 10px 25px oklch(0% 0 0 / 0.35);
+
+  --sidebar-item-text: oklch(85% 0.01 260);
+  --sidebar-item-icon: oklch(68% 0.02 260);
+  --sidebar-item-active-text: var(--white-color);
+  --sidebar-item-active-icon: var(--white-color);
+  --sidebar-item-active-bg: var(--main-color);
+  --sidebar-item-hover-bg: oklch(61.284% 0.2108 275.292 / 0.22);
+  --sidebar-item-hover-text: var(--white-color);
+  --sidebar-item-hover-icon: var(--white-color);
+
+  --header-bg: oklch(0.23 0.04 264);
+  --header-border: oklch(25% 0.02 260);
+  --header-shadow: 0 8px 28px oklch(0% 0 0 / 0.3);
+
+  /* Charts */
+  --chart-bg: oklch(0.23 0.04 264);
+
+  /* ==================== CHAT ==================== */
+  --chat-bg: oklch(0.23 0.04 264);
+  --chat-sidebar-bg: var(--chat-bg);
+  --chat-header-bg: oklch(15% 0.01 265);
+  --chat-border: oklch(25% 0.02 260);
+
+  --chat-room-hover: var(--sidebar-item-hover-bg);
+  --chat-room-active: var(--main-color);
+  --chat-text-main: oklch(90% 0.01 260);
+  --chat-text-muted: oklch(55% 0.02 260);
+  --chat-text-active: oklch(100% 0 0);
+
+  --chat-input-bg: oklch(18% 0.01 265);
+  --chat-message-own-bg: var(--main-color);
+  --chat-message-other-bg: oklch(22% 0.015 265);
+  --chat-message-own-text: oklch(100% 0 0);
+  --chat-message-other-text: oklch(88% 0.01 260);
+
+  /* Popper */
+  --popper-bg: oklch(20% 0.012 265);
+  --popper-border: oklch(28% 0.02 260);
+  --popper-text: oklch(88% 0.01 260);
+  --popper-hover: var(--main-color);
+  --popper-selected: oklch(55% 0.28 28);
+  --popper-ring: oklch(60% 0.38 28);
+  --popper-placeholder: oklch(48% 0.02 260);
+  --popper-shadow: rgba(0, 0, 0, 0.5);
+}
 /* =======================
     Base Styles
     ======================= */

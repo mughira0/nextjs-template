@@ -8,6 +8,7 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}", // ← needed for App Router
     "./src/**/*.{js,ts,jsx,tsx,mdx}", // ← if you have a src/ folder
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {

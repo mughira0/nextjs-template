@@ -50,7 +50,7 @@ export function MessageBubble({
 
         <div
           className={cn(
-            "rounded-[var(--chat-radius)] px-3.5 py-2.5 text-sm leading-relaxed",
+            "rounded-[var(--chat-radius)] px-3.5 py-2.5 text-sm leading-relaxed border border-[var(--chat-border)] shadow-sm",
             isOwn
               ? "rounded-br-[var(--chat-radius-sm)] bg-[var(--chat-message-own-bg)] text-[var(--chat-message-own-text)]"
               : "rounded-bl-[var(--chat-radius-sm)] bg-[var(--chat-message-other-bg)] text-[var(--chat-message-other-text)]",

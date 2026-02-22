@@ -24,7 +24,7 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
       <div
         ref={ref}
         className={cn(
-          "relative rounded-full bg-muted flex items-center justify-center shrink-0",
+          "relative rounded-full border border-[var(--field-border)] bg-muted flex items-center justify-center shrink-0",
           className,
         )}
         style={{ width: size, height: size }}

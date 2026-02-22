@@ -4,6 +4,7 @@ import Button from "@/components/core/button";
 import React from "react";
 import TextArea from "@/components/core/textArea";
 import Dropdown from "@/components/core/dropdown";
+import { Box } from "@/components/core/box";
 
 function Example() {
   const [inputValue1, setInputValue1] = React.useState({
@@ -45,21 +46,21 @@ function Example() {
       <div className="w-full">
         {/* Header */}
         <div className="mb-12 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-4xl font-bold text-primary mb-2">
             Component Showcase
           </h1>
-          <p className="text-gray-600">Preview of all UI components</p>
+          <p className="text-primary">Preview of all UI components</p>
         </div>
 
         {/* Main Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Input Sizes Card */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+          <Box>
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl font-bold text-primary mb-2">
                 Input Sizes
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-primary">
                 Small, Medium, and Large input variations
               </p>
             </div>
@@ -95,15 +96,15 @@ function Example() {
                 size="lg"
               />
             </div>
-          </div>
+          </Box>
 
           {/* Input Variants Card */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+          <Box>
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl font-bold text-primary mb-2">
                 Input Variants
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-primary">
                 Primary, Secondary, and Error states
               </p>
             </div>
@@ -140,15 +141,15 @@ function Example() {
                 error={inputValue2.error ? "This is an error message." : ""}
               />
             </div>
-          </div>
+          </Box>
 
           {/* Button Sizes Card */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+          <Box>
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl font-bold text-primary mb-2">
                 Button Sizes
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-primary">
                 Different button size options
               </p>
             </div>
@@ -175,15 +176,15 @@ function Example() {
                 <span className="text-sm text-gray-500">lg</span>
               </div>
             </div>
-          </div>
+          </Box>
 
           {/* Button Variants Card */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+          <Box>
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl font-bold text-primary mb-2">
                 Button Variants
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-primary">
                 Different button style options
               </p>
             </div>
@@ -222,14 +223,14 @@ function Example() {
                 </Button>
               </div>
             </div>
-          </div>
+          </Box>
 
-          <div className="bg-white rounded-2xl   shadow-lg p-8 border border-gray-200">
+          <Box>
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl font-bold text-primary mb-2">
                 TexArea Variants
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-primary">
                 Primary, Secondary, and Error states
               </p>
             </div>
@@ -266,15 +267,15 @@ function Example() {
                 error={inputValue2.error ? "This is an error message." : ""}
               />
             </div>
-          </div>
+          </Box>
 
           {/* Dropdown Sizes Card */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+          <Box>
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl font-bold text-primary mb-2">
                 Dropdown Sizes
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-primary">
                 Small, Medium, and Large dropdown variations
               </p>
             </div>
@@ -313,15 +314,15 @@ function Example() {
                 size="lg"
               />
             </div>
-          </div>
+          </Box>
 
           {/* Dropdown Variants Card */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+          <Box>
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl font-bold text-primary mb-2">
                 Dropdown Variants
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-primary">
                 Primary, Secondary, and Error states
               </p>
             </div>
@@ -361,7 +362,7 @@ function Example() {
                 error={dropdownValue2.error ? "This is an error message." : ""}
               />
             </div>
-          </div>
+          </Box>
         </div>
 
         {/* Footer Note */}

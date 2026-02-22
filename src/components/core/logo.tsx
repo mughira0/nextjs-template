@@ -1,8 +1,8 @@
-// components/Logo.tsx
 "use client";
 
 import Image from "next/image";
 import { FC, memo } from "react";
+import { useTheme } from "next-themes";
 
 interface LogoProps {
   isMobileView?: boolean;
@@ -10,22 +10,26 @@ interface LogoProps {
 }
 
 const Logo: FC<LogoProps> = memo(({ isMobileView = false, className = "" }) => {
-  // This key change will properly re-trigger the fade-in animation when switching
+  const { theme, resolvedTheme } = useTheme();
+
+  // Determine if dark mode is active
+  const isDark = resolvedTheme === "dark";
+
+  // Animation key for re-triggering
   const animationKey = isMobileView ? "small" : "full";
 
   return (
     <div className={`flex items-center justify-center ${className}`}>
-      <div
-        key={animationKey} // Perfect: changes when isMobileView changes → re-animates
-        className=""
-      >
+      <div key={animationKey}>
         {isMobileView ? (
           <Image
             src="/logos/full.png"
             alt="Logo"
             width={42}
             height={42}
-            className="w-[42px] h-[42px]  object-contain drop-shadow-sm"
+            className={`w-[42px] h-[42px] object-contain drop-shadow-sm ${
+              isDark ? "invert" : ""
+            }`}
           />
         ) : (
           <Image
@@ -33,7 +37,9 @@ const Logo: FC<LogoProps> = memo(({ isMobileView = false, className = "" }) => {
             alt="Company Logo"
             width={140}
             height={100}
-            className="w-[140px] h-[100px] object-contain drop-shadow-md"
+            className={`w-[140px] h-[100px] object-contain drop-shadow-md ${
+              isDark ? "invert" : ""
+            }`}
           />
         )}
       </div>

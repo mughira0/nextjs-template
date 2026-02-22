@@ -26,18 +26,21 @@ const dropdownBase = {
     primary: {
       borderColor: "var(--input-border)",
       focusBorderColor: "var(--main-color)",
+      backgroundColor: "transparent",
       focusBorderColorLight:
         "color-mix(in oklch, var(--main-color), white 20%)",
     },
     secondary: {
       borderColor: "var(--secondary-border)",
       focusBorderColor: "var(--secondary-color)",
+      backgroundColor: "transparent",
       focusBorderColorLight:
         "color-mix(in oklch, var(--secondary-color), white 20%)",
     },
     error: {
       borderColor: "var(--danger-border)",
       focusBorderColor: "var(--danger-color)",
+      backgroundColor: "transparent",
       focusBorderColorLight:
         "color-mix(in oklch, var(--danger-color), white 20%)",
     },

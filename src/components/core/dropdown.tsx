@@ -20,7 +20,7 @@ const Dropdown = <T,>({
   isSearchable = false,
 }: DropdownProps<T>) => {
   const handleChange = (
-    selected: SingleValue<{ label: string; value: T[keyof T] }>
+    selected: SingleValue<{ label: string; value: T[keyof T] }>,
   ) => {
     if (setter) setter(selected ? selected.value : null);
   };
@@ -48,6 +48,7 @@ const Dropdown = <T,>({
     control: (provided, state) => ({
       ...provided,
       borderColor: variantConfig.borderColor,
+      backgroundColor: variantConfig.backgroundColor,
       borderRadius: "var(--field-radius)",
       minHeight: sizeConfig.control.minHeight,
       fontSize: sizeConfig.control.fontSize,

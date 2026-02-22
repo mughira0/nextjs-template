@@ -29,7 +29,7 @@ const isPathActive = (item: RoutesInterface, pathname: string): boolean => {
 
 const getExpandedPaths = (
   routes: RoutesInterface[],
-  pathname: string
+  pathname: string,
 ): Set<string> => {
   const expanded = new Set<string>();
 
@@ -50,17 +50,17 @@ const Sidebar: FC<SidebarProps> = ({ isMobileView }) => {
   const pathname = usePathname();
   const dispatch = useDispatch();
   const { sidebarCollapsed } = useSelector(
-    (state: RootState) => state.commonReducer
+    (state: RootState) => state.commonReducer,
   );
 
   // Calculate which items should be expanded on mount and pathname change
   const expandedPaths = useMemo(
     () => getExpandedPaths(Routes, pathname),
-    [pathname]
+    [pathname],
   );
 
   return (
-    <aside className="w-full bg-[var(--sidebar-bg)] h-full border-[var(--sidebar-border)] shadow-[var(--sidebar-shadow)] rounded-[var(--sidebar-radius)] p-4 flex flex-col gap-0.5">
+    <aside className="w-full bg-[var(--sidebar-bg)] shadow-[var(--sidebar-shadow)] h-full border-[var(--sidebar-border)] rounded-[var(--sidebar-radius)] p-4 flex flex-col gap-0.5">
       {/* Header with Logo and Toggle */}
       <div className="flex items-center justify-center relative mb-4">
         <Logo isMobileView={sidebarCollapsed} />
@@ -150,8 +150,8 @@ const SidebarItem: FC<SidebarItemProps> = ({
   const itemClasses = cn(
     "flex items-center justify-between gap-3 p-2 rounded-md cursor-pointer text-sm transition-all duration-200 group",
     isActive
-      ? "bg-[var(--sidebar-item-hover-bg)] text-[var(--sidebar-item-active-text)] my-1"
-      : "text-[var(--sidebar-item-text)] hover:bg-[var(--sidebar-item-hover-bg)] hover:text-[var(--sidebar-item-hover-text)]"
+      ? "bg-[var(--sidebar-item-active-bg)] text-[var(--sidebar-item-active-text)] my-1"
+      : "text-[var(--sidebar-item-text)] hover:bg-[var(--sidebar-item-hover-bg)] hover:text-[var(--sidebar-item-hover-text)]",
   );
 
   const iconClasses = cn(
@@ -159,7 +159,7 @@ const SidebarItem: FC<SidebarItemProps> = ({
     isActive
       ? "text-[var(--sidebar-item-active-icon)]"
       : "text-[var(--sidebar-item-icon)]",
-    "group-hover:text-[var(--sidebar-item-hover-text)]"
+    "group-hover:text-[var(--sidebar-item-hover-text)]",
   );
 
   const chevronClasses = cn(
@@ -168,12 +168,12 @@ const SidebarItem: FC<SidebarItemProps> = ({
     isActive
       ? "text-[var(--sidebar-item-active-icon)]"
       : "text-[var(--sidebar-item-icon)]",
-    "group-hover:text-[var(--sidebar-item-hover-text)]"
+    "group-hover:text-[var(--sidebar-item-hover-text)]",
   );
 
   const submenuClasses = cn(
     "flex flex-col mt-1 border-[var(--sidebar-item-icon)]/10",
-    sidebarCollapsed ? "border-l" : "pl-2 border-l-2"
+    sidebarCollapsed ? "border-l" : "pl-2 border-l-2",
   );
 
   return (
@@ -186,7 +186,7 @@ const SidebarItem: FC<SidebarItemProps> = ({
           type="button" // Explicitly non-submit
           className={cn(
             itemClasses,
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sidebar-item-active-icon)] focus-visible:ring-offset-2"
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sidebar-item-active-icon)] focus-visible:ring-offset-2",
           )}
           aria-expanded={isOpen}
           aria-controls={`submenu-${path}`} // Link to submenu ID for screen readers
@@ -208,7 +208,7 @@ const SidebarItem: FC<SidebarItemProps> = ({
               <span className={iconClasses}>
                 {cloneElement(
                   icon as React.ReactElement,
-                  { size: 16 } as { size: number }
+                  { size: 16 } as { size: number },
                 )}
               </span>
             )}
@@ -236,7 +236,7 @@ const SidebarItem: FC<SidebarItemProps> = ({
               <span className={iconClasses}>
                 {cloneElement(
                   icon as React.ReactElement,
-                  { size: 16 } as { size: number }
+                  { size: 16 } as { size: number },
                 )}
               </span>
             )}

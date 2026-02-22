@@ -2,11 +2,12 @@
 
 import { cn, generateAvatarProps } from "@/helper/generic";
 import { IRoom, IUser } from "@/types/system/slice";
-import { MoreVertical } from "lucide-react";
+import { Bell, ExternalLink, MoreVertical, User } from "lucide-react";
 import { useSelector } from "react-redux";
 import { Avatar } from "../avatar";
 import Button from "../button";
 import GroupAvatars from "../group-avatar";
+import Popper from "../popper";
 
 interface ChatHeaderProps {
   room: IRoom;
@@ -42,10 +43,30 @@ export function ChatHeader({ room }: ChatHeaderProps) {
         </div>
       </div>
 
-      <div className="flex items-center gap-1">
-        <Button variant="primary" size="sm" aria-label="More options">
-          <MoreVertical className="size-4 text-[var(--white-color)]" />
-        </Button>
+      <div className="flex items-center gap-1 ">
+        <Popper
+          items={[
+            {
+              label: "Profile",
+              value: "view_profile",
+              icon: <User className="size-4" />,
+            },
+            {
+              label: "Notifications",
+              value: "mute_notifications",
+              icon: <Bell className="size-4" />,
+            },
+            {
+              label: "Leave",
+              value: "leave_group",
+              icon: <ExternalLink className="size-4" />,
+            },
+          ]}
+        >
+          <Button variant="primary" size="sm" aria-label="More options">
+            <MoreVertical className="size-4 text-[var(--white-color)]" />
+          </Button>
+        </Popper>
       </div>
     </header>
   );
