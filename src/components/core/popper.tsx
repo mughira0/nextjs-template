@@ -13,14 +13,14 @@ import {
 } from "@floating-ui/react";
 import { cn } from "@/helper/generic";
 import { PopperProps } from "@/types/components/popper";
+import { MoreHorizontal } from "lucide-react";
 
 export default function Popper({
   items,
-  value,
   onClick,
   placement = "bottom",
   className = "",
-  children,
+  children = <MoreHorizontal size={15} />,
 }: PopperProps) {
   const [open, setOpen] = useState(false);
   const arrowRef = useRef(null);
@@ -60,7 +60,7 @@ export default function Popper({
           style={floatingStyles}
           {...getFloatingProps()}
           className={cn(
-            "z-50 min-w-[200px]",
+            "z-50 min-w-[120px] ",
             "bg-[var(--popper-bg)] border border-[var(--popper-border)]",
             "rounded-xl shadow-xl",
             "overflow-visible",
@@ -87,13 +87,13 @@ export default function Popper({
                   setOpen(false);
                 }}
                 className={cn(
-                  "flex w-full items-center gap-3 px-4 py-2.5 text-left",
+                  "flex w-full items-center gap-3 flex-shrink-0 px-4 py-1.5 text-left",
                   "text-[var(--popper-text)] hover:bg-[var(--popper-hover)]",
                   "hover:text-white rounded-lg",
                 )}
               >
                 {item.icon}
-                <span>{item.label}</span>
+                <span className="text-nowrap text-sm">{item.label}</span>
               </button>
             ))}
           </div>

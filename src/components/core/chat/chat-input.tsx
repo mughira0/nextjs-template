@@ -57,6 +57,7 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
   }, []);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     if (e.target.files?.length) {
       addFiles(e.target.files);
       e.target.value = ""; // reset so same file can be re-added
@@ -146,7 +147,10 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
           variant="ghost"
           size="sm"
           aria-label="Attach file"
-          onClick={() => fileInputRef.current?.click()}
+          onClick={(e) => {
+            e.preventDefault();
+            fileInputRef.current?.click();
+          }}
         >
           <Paperclip className="size-4 text-[var(--text-color)]" />
         </Button>

@@ -1,5 +1,6 @@
 const baseButtonClasses = [
   "cursor-pointer", // Default cursor
+  "flex items-center justify-center gap-1 flex-shrink-0", // Center content with gap
   "transition-colors duration-200 flex items-center justify-center",
 ];
 const buttonBase = {

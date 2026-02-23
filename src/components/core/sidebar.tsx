@@ -10,6 +10,7 @@ import Routes from "@/routes";
 import Logo from "./logo";
 import { cn } from "@/helper/generic";
 import { RootState } from "@/redux/store/store";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const isPathActive = (item: RoutesInterface, pathname: string): boolean => {
   // Direct match
@@ -117,6 +118,7 @@ const SidebarItem: FC<SidebarItemProps> = ({
   sidebarCollapsed,
 }) => {
   const { icon, title = "", sub = [], path = "" } = item;
+  const isMobileView = useIsMobile(1024);
 
   // Check if this item or any child is active
   const isActive = isPathActive(item, pathname);
@@ -212,12 +214,12 @@ const SidebarItem: FC<SidebarItemProps> = ({
                 )}
               </span>
             )}
-            {!sidebarCollapsed && (
+            {(!sidebarCollapsed || !isMobileView) && (
               <span className="truncate text-[13px]">{title}</span>
             )}
           </Link>
 
-          {!sidebarCollapsed && (
+          {(!sidebarCollapsed || !isMobileView) && (
             <span aria-hidden="true">
               {" "}
               {/* Visual indicator, not interactive */}
@@ -240,7 +242,7 @@ const SidebarItem: FC<SidebarItemProps> = ({
                 )}
               </span>
             )}
-            {!sidebarCollapsed && (
+            {(!sidebarCollapsed || isMobileView) && (
               <span className="truncate text-[13px]">{title}</span>
             )}
           </Link>

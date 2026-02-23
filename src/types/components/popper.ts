@@ -14,5 +14,5 @@ export interface PopperProps {
   placeholder?: string;
   placement?: Placement;
   className?: string;
-  children: ReactNode;
+  children?: ReactNode;
 }

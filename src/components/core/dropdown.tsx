@@ -1,7 +1,6 @@
 "use client";
 import dropdownBase from "@/baseStyles/dropdown.styles";
 import { DropdownProps } from "@/types/components/dropdown";
-import { FC } from "react";
 import Select, { SingleValue, StylesConfig } from "react-select";
 import Label from "./label";
 const Dropdown = <T,>({

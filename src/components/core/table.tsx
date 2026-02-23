@@ -1,144 +1,250 @@
 "use client";
 
-import React, { CSSProperties, ReactNode } from "react";
+import React from "react";
+import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
+import {
+  ColumnDef,
+  SortDirection,
+  TableRow,
+  TableStructureProps,
+} from "@/types/components/table";
+import NoData from "./no-data";
+import PaginationComponent from "./pagination";
 
-export interface TableHeader {
-  label: string;
-  key: string;
-  align?: "left" | "center" | "right";
-  width?: string;
-  headerStyle?: CSSProperties;
-  headerClassName?: string;
-  cellStyle?: CSSProperties;
-  cellClassName?: string;
-  render?: (value: any, row: any, index: number) => ReactNode;
-}
-
-interface TableStructureProps {
-  headers: TableHeader[];
-  data: any[];
-  className?: string;
-  tableClassName?: string;
-  theadClassName?: string;
-  tbodyClassName?: string;
-  trClassName?: string;
-  thClassName?: string;
-  tdClassName?: string;
-  emptyMessage?: string;
-  emptyHeight?: string;
-  onRowClick?: (row: any, index: number) => void;
-  striped?: boolean;
-  hover?: boolean;
+function SkeletonRow({ count }: { count: number }) {
+  return (
+    <tr style={{ borderBottom: "1px solid var(--table-border)" }}>
+      {Array.from({ length: count }).map((_, i) => (
+        <td key={i} className="px-4 py-3">
+          <div
+            className="h-3.5 rounded-full animate-pulse"
+            style={{
+              background: "var(--table-skeleton-bg)",
+              width: i === 0 ? "55%" : i % 3 === 0 ? "38%" : "72%",
+            }}
+          />
+        </td>
+      ))}
+    </tr>
+  );
 }
 
 export default function TableStructure({
-  headers,
+  header,
   data,
+  headerTitle,
+  actions,
+  sort,
+  setSort,
+  page,
+  totalPages,
+  setPage,
+  customeBodyStyle,
   className = "",
-  tableClassName = "",
-  theadClassName = "",
-  tbodyClassName = "",
-  trClassName = "",
-  thClassName = "",
-  tdClassName = "",
-  emptyMessage = "No data found",
-  emptyHeight = "280px",
-  onRowClick,
-  striped = false,
-  hover = true,
+  bodyClassName = "",
+  minHeight,
+  noDataText = "No data found",
+  stickyHeader = false,
+  loading = false,
+  skeletonRows = 5,
 }: TableStructureProps) {
-  return (
-    <div className={`table-container ${className}`}>
-      <div className="table-wrapper">
-        <table className={`table ${tableClassName}`}>
-          {/* Header */}
-          <thead className={`table-head ${theadClassName}`}>
-            <tr className={trClassName}>
-              {headers.map(
-                ({
-                  label,
-                  key,
-                  align = "left",
-                  width,
-                  headerStyle,
-                  headerClassName = "",
-                }) => (
-                  <th
-                    key={key}
-                    className={`table-th ${thClassName} ${headerClassName} text-${align}`}
-                    style={{ width, ...headerStyle }}
-                  >
-                    {label}
-                  </th>
-                )
-              )}
-            </tr>
-          </thead>
+  const handleHeaderClick = (col: ColumnDef) => {
+    if (!col.sortable || !sort || !setSort) return;
+    const nextDir: SortDirection =
+      sort.key === col.value && sort.dir === "asc" ? "desc" : "asc";
+    setSort({ key: col.value, dir: nextDir });
+  };
 
-          {/* Body */}
-          <tbody className={`table-body ${tbodyClassName}`}>
-            {data.length === 0 ? (
+  const colWidth = (w?: string) => {
+    const totalSpecified = header.filter((h) => !h.width);
+    return w ?? `${100 / Math.max(totalSpecified.length, 1)}%`;
+  };
+
+  const getRowStyle = (index: number): React.CSSProperties => {
+    if (index % 2 !== 0) return { background: "var(--border-color)" };
+    return { background: "var(--table-bg)" };
+  };
+
+  const hasHeader = headerTitle !== undefined || actions !== undefined;
+  const hasPagination =
+    page !== undefined && totalPages !== undefined && setPage !== undefined;
+
+  return (
+    <div
+      className={`w-full flex flex-col overflow-hidden ${className}`}
+      style={{
+        background: "var(--table-bg)",
+        border: "1px solid var(--table-border)",
+        borderRadius: "var(--table-radius)",
+      }}
+    >
+      {/* ── Header bar (title + actions) ── */}
+      {hasHeader && (
+        <div
+          className="flex items-center justify-between gap-4 px-4 py-3 shrink-0"
+          style={{
+            borderBottom: "1px solid var(--table-border)",
+            background: "var(--table-bg)",
+          }}
+        >
+          {headerTitle !== undefined ? (
+            <div
+              className="text-sm font-semibold"
+              style={{ color: "var(--table-header-text)" }}
+            >
+              {headerTitle}
+            </div>
+          ) : (
+            <div />
+          )}
+
+          {actions !== undefined && (
+            <div className="flex items-center gap-2 shrink-0">{actions}</div>
+          )}
+        </div>
+      )}
+
+      {/* ── Table (header + body share one scroll container) ── */}
+      <div className="w-full">
+        <div
+          className={`overflow-x-auto  max-w-[100vw] overflow-y-auto ${bodyClassName}`}
+          style={{ minHeight, ...customeBodyStyle }}
+        >
+          <table
+            className="w-full  table-fixed text-[var(--fs-sm)]"
+            style={{ color: "var(--table-body-text)" }}
+          >
+            <thead
+              style={{
+                background: "var(--table-header-bg)",
+                borderBottom: "1px solid var(--table-header-border)",
+                ...(stickyHeader
+                  ? { position: "sticky", top: 0, zIndex: 10 }
+                  : {}),
+              }}
+            >
               <tr>
-                <td
-                  colSpan={headers.length}
-                  className="table-td-empty"
-                  style={{ height: emptyHeight }}
-                >
-                  <div className="empty-state">
-                    <svg
-                      className="empty-icon"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
-                      />
-                    </svg>
-                    <p className="empty-text">{emptyMessage}</p>
-                  </div>
-                </td>
+                {header.map((col) => (
+                  <th
+                    key={col.value}
+                    scope="col"
+                    onClick={() => handleHeaderClick(col)}
+                    style={{
+                      width: colWidth(col.width),
+                      cursor: col.sortable ? "pointer" : "default",
+                      userSelect: "none",
+                      color: "var(--table-header-text)",
+                      transition: "background 0.12s, color 0.12s",
+                      ...col.headerStyle,
+                    }}
+                    className={[
+                      "px-4 py-3 border-[0_1_0_0] border-r-[var(--table-header-border)] text-xs font-semibold uppercase tracking-wider whitespace-nowrap last:border-r-0",
+                      col.align ? `text-${col.align}` : "text-left",
+                      col.sortable
+                        ? "hover:bg-[var(--table-row-hover-bg)] hover:text-[var(--table-row-hover-text)]"
+                        : "",
+                      col.className ?? "",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                  >
+                    <span className="inline-flex items-center">
+                      {col.label}
+                      {col.sortable && sort && (
+                        <SortIcon
+                          active={sort.key === col.value}
+                          dir={sort.dir}
+                        />
+                      )}
+                    </span>
+                  </th>
+                ))}
               </tr>
-            ) : (
-              data.map((row, index) => (
-                <tr
-                  key={row.id || index}
-                  onClick={() => onRowClick?.(row, index)}
-                  className={`
-                    table-tr
-                    ${trClassName}
-                    ${striped && index % 2 === 1 ? "table-tr-striped" : ""}
-                    ${hover ? "table-tr-hover" : ""}
-                    ${onRowClick ? "table-tr-clickable" : ""}
-                  `}
-                >
-                  {headers.map(
-                    ({
-                      key,
-                      align = "left",
-                      width,
-                      cellStyle,
-                      cellClassName = "",
-                      render,
-                    }) => (
-                      <td
-                        key={key}
-                        className={`table-td ${tdClassName} ${cellClassName} text-${align}`}
-                        style={{ width, ...cellStyle }}
-                      >
-                        {render ? render(row[key], row, index) : row[key]}
-                      </td>
-                    )
-                  )}
+            </thead>
+            <tbody>
+              {loading ? (
+                Array.from({ length: skeletonRows }).map((_, i) => (
+                  <SkeletonRow key={i} count={header.length} />
+                ))
+              ) : data.length === 0 ? (
+                <tr>
+                  <td colSpan={header.length}>
+                    <NoData title={noDataText} />
+                  </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : (
+                data.map((row: TableRow, rowIndex: number) => (
+                  <tr
+                    key={rowIndex}
+                    style={{
+                      ...getRowStyle(rowIndex),
+                      borderBottom: "1px solid var(--table-border)",
+                      transition: "background 0.1s, color 0.1s",
+                    }}
+                  >
+                    {header.map((col) => (
+                      <td
+                        key={col.value}
+                        style={{
+                          width: colWidth(col.width),
+                          ...col.cellStyle,
+                        }}
+                        className={[
+                          "px-4 py-3 border-[0_1_0_0] text-sm border-r-[var(--table-border)] whitespace-nowrap text-ellipsis last:border-r-0",
+                          col.align ? `text-${col.align}` : "text-left",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")}
+                      >
+                        {row[col.value]}
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
+
+      {/* ── Pagination ── */}
+      {hasPagination && (
+        <div className="flex items-center justify-end gap-4 px-4 py-3 shrink-0">
+          <PaginationComponent
+            page={page!}
+            totalPages={totalPages!}
+            setPage={setPage!}
+          />
+        </div>
+      )}
     </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Sub-components
+// ---------------------------------------------------------------------------
+
+function SortIcon({ active, dir }: { active: boolean; dir: SortDirection }) {
+  if (!active)
+    return (
+      <ChevronsUpDown
+        size={13}
+        className="ml-1 shrink-0"
+        style={{ color: "var(--table-sort-inactive)", opacity: 0.45 }}
+      />
+    );
+  return dir === "asc" ? (
+    <ArrowUp
+      size={13}
+      className="ml-1 shrink-0"
+      style={{ color: "var(--table-sort-active)" }}
+    />
+  ) : (
+    <ArrowDown
+      size={13}
+      className="ml-1 shrink-0"
+      style={{ color: "var(--table-sort-active)" }}
+    />
   );
 }

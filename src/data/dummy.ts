@@ -4,8 +4,8 @@ import { IMessage, IRoom, IUser } from "@/types/system/slice";
 export const users: IUser[] = [
   {
     _id: "u1",
-    name: "Mughira Khan",
-    email: "mughira.khan@techcorp.com",
+    name: "Mughira Khan ",
+    email: "mughir@techcorp.com",
     role: "admin",
     phone: "+92 335 266 8377",
     photo: "/images/user3.png", // confident man in blazer, tech background
@@ -14,7 +14,7 @@ export const users: IUser[] = [
   {
     _id: "u2",
     name: "Baptista Silva",
-    email: "baptista.silva@freelance.io",
+    email: "baptisa@freelance.io",
     role: "client",
     phone: "+55 11 98765-4321",
     photo: "/images/user2.png", // casual professional man smiling
@@ -22,21 +22,21 @@ export const users: IUser[] = [
   {
     _id: "u3",
     name: "Sarah Chen",
-    email: "sarah.chen@designstudio.com",
+    email: "sara@designstudio.com",
     role: "member",
     photo: "/images/user.jpg", // professional woman with neat hair
   },
   {
     _id: "u4",
     name: "Alex Rivera",
-    email: "alex.rivera@startup.ly",
+    email: "aleivera@startup.ly",
     role: "developer",
     photo: "/images/user2.png", // young dev in hoodie, friendly
   },
   {
     _id: "u5",
     name: "Priya Sharma",
-    email: "priya.sharma@agency.co",
+    email: "priarma@agency.co",
     role: "designer",
   },
 ];

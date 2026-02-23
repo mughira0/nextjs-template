@@ -133,6 +133,35 @@
   --toggle-icon-dark: oklch(22% 0.04 265);
 
   --toggle-star-color: oklch(90% 0.02 260);
+
+  --table-bg: var(--card);
+  --table-header-bg: var(--main-color);
+  --table-header-border: var(--field-border);
+  --table-body-text: var(--primary-text-color);
+  --table-header-text: var(--white-color);
+
+  --table-border: var(--field-border);
+  --table-muted-text: var(--secondary-text-color);
+  --table-skeleton-bg: oklch(90% 0.01 265);
+  --table-radius: var(--global-radius);
+  --table-sort-active: var(--white-color);
+  --table-sort-inactive: var(--white-color);
+  /* ==================== PAGINATION ==================== */
+  --pagination-bg: var(--card);
+  --pagination-border: var(--field-border);
+  --pagination-text: var(--primary-text-color);
+
+  --pagination-page-bg: transparent;
+  --pagination-page-text: var(--primary-text-color);
+
+  --pagination-page-hover-bg: var(--sidebar-item-hover-bg);
+  --pagination-page-hover-text: var(--primary-text-color);
+
+  --pagination-active-bg: var(--main-color);
+  --pagination-active-text: var(--white-color);
+
+  --pagination-disabled-text: var(--secondary-text-color);
+  --pagination-radius: 6px;
 }
 
 .dark {
@@ -214,6 +243,39 @@
   --popper-ring: oklch(60% 0.38 28);
   --popper-placeholder: oklch(48% 0.02 260);
   --popper-shadow: rgba(0, 0, 0, 0.5);
+
+  /* Table Structure */
+
+  --table-bg: var(--card);
+  --table-header-bg: var(--main-color);
+  --table-header-text: var(--primary-text-color);
+  --table-header-border: var(--field-border);
+  --table-body-text: var(--primary-text-color);
+  --table-border: var(--field-border);
+  --table-row-hover-bg: var(--sidebar-item-hover-bg);
+  --table-row-hover-text: var(--sidebar-item-hover-text);
+  --table-muted-text: var(--secondary-text-color);
+  --table-skeleton-bg: oklch(25% 0.02 265);
+  --table-radius: var(--global-radius);
+  --table-sort-active: var(--main-color);
+  --table-sort-inactive: var(--secondary-text-color);
+
+  /* ==================== PAGINATION ==================== */
+  --pagination-bg: var(--card);
+  --pagination-border: var(--field-border);
+  --pagination-text: var(--primary-text-color);
+
+  --pagination-page-bg: transparent;
+  --pagination-page-text: var(--primary-text-color);
+
+  --pagination-page-hover-bg: var(--sidebar-item-hover-bg);
+  --pagination-page-hover-text: var(--white-color);
+
+  --pagination-active-bg: var(--main-color);
+  --pagination-active-text: var(--white-color);
+
+  --pagination-disabled-text: var(--secondary-text-color);
+  --pagination-radius: 6px;
 }
 /* =======================
     Base Styles
