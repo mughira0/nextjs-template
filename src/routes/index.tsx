@@ -4,6 +4,7 @@ import {
   Home,
   LayoutDashboard,
   MessageCircleMore,
+  Settings,
   User,
 } from "lucide-react";
 
@@ -57,6 +58,11 @@ const Routes: RoutesInterface[] = [
     title: "Chat",
     path: "/chat",
     icon: <MessageCircleMore />,
+  },
+  {
+    title: "Profile",
+    path: "/profile",
+    icon: <Settings />,
   },
 ];
 
