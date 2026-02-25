@@ -26,7 +26,7 @@ const Dropdown = <T,>({
 
   const mappedOptions =
     options?.map((opt) => ({
-      label: String(opt[optionLabel!]),
+      label: String(opt[optionLabel!]),a
       value: opt[optionValue!],
     })) || [];
 
