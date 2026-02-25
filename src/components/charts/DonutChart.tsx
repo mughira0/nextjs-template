@@ -35,7 +35,7 @@ const DonutChartComponent = ({
   height = 300,
   showLegend = true,
   className = "",
-  backgroundColor = "var(--chart-bg)",
+  backgroundColor = "",
   showPercentages = false,
   cutoutPercent = 60,
   centerLabel,

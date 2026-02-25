@@ -15,7 +15,7 @@
   --card: oklch(1 0 0); /* default white-ish */
 
   --radius: 0.625rem;
-  --global-radius: 5px;
+  --global-radius: 10px;
 
   --app-bg: oklch(98.5% 0.008 265); /* Very slightly cooler light bg */
 
@@ -174,7 +174,7 @@
   --secondary-color: oklch(55% 0.18 262);
   --primary-text-color: oklch(92% 0.01 260);
   --white-color: oklch(100% 0 0);
-  --secondary-text-color: oklch(68% 0.02 260);
+  --secondary-text-color: oklch(76.539% 0.00974 258.463);
   --card: oklch(18% 0.01 265);
 
   --app-bg: oklch(11% 0.008 265);

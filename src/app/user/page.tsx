@@ -26,41 +26,6 @@ const ROLE_META = {
   viewer: { bg: "oklch(94% 0.03 100)", color: "oklch(36% 0.10 100)" },
 };
 
-function Avatar({ name }: { name: string }) {
-  const initials = name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-  const hue = (name.charCodeAt(0) * 37) % 360;
-  return (
-    <span
-      className="inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-bold shrink-0"
-      style={{
-        background: `oklch(85% 0.12 ${hue})`,
-        color: `oklch(28% 0.15 ${hue})`,
-      }}
-    >
-      {initials}
-    </span>
-  );
-}
-
-function UserCell({ user }: { user: IUser }) {
-  return (
-    <span className="inline-flex items-center gap-2.5 min-w-0">
-      <Avatar name={user.name} />
-      <span
-        className="truncate font-medium"
-        style={{ color: "oklch(18% 0.02 260)" }}
-      >
-        {user.name}
-      </span>
-    </span>
-  );
-}
-
 function RoleBadge({ role }: { role: IUser["role"] }) {
   const m = ROLE_META?.["admin"]!;
   return (

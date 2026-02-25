@@ -89,8 +89,8 @@ export default function TableStructure({
         >
           {headerTitle !== undefined ? (
             <div
-              className="text-sm font-semibold"
-              style={{ color: "var(--table-header-text)" }}
+              className="text-lg font-semibold"
+              style={{ color: "var(--text-color)" }}
             >
               {headerTitle}
             </div>
@@ -112,7 +112,7 @@ export default function TableStructure({
         >
           <table
             className="w-full  table-fixed text-[var(--fs-sm)]"
-            style={{ color: "var(--table-body-text)" }}
+            style={{ color: "var(--table-body-text)", minWidth: "700px" }}
           >
             <thead
               style={{

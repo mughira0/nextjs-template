@@ -6,10 +6,11 @@ import { useSelector } from "react-redux";
 import Header from "./header";
 import Sidebar from "./sidebar";
 import { RootState } from "@/redux/store/store";
+import { cn } from "@/helper/generic";
 
 const SidebarSkeleton: FC<SidebarSkeletonProps> = ({ children }) => {
   const { sidebarCollapsed } = useSelector(
-    (state: RootState) => state.commonReducer
+    (state: RootState) => state.commonReducer,
   );
   const isMobile = useIsMobile();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
@@ -41,12 +42,17 @@ const SidebarSkeleton: FC<SidebarSkeletonProps> = ({ children }) => {
   }, [mobileSidebarOpen]);
 
   return (
-    <div className="flex h-screen bg-var(--app-bg)">
+    <div
+      className={cn("grid h-screen bg-[var(--app-bg)]")}
+      style={{
+        gridTemplateColumns: isMobile ? "1fr" : `${sidebarWidth} 1fr`,
+      }}
+    >
       {/* Desktop Sidebar */}
       {!isMobile && (
         <div
           className="flex-shrink-0 transition-all duration-300 ease-in-out p-2"
-          style={{ width: sidebarWidth }}
+          style={{ width: "100%" }}
         >
           <Sidebar isMobileView={false} />
         </div>
@@ -91,7 +97,7 @@ const SidebarSkeleton: FC<SidebarSkeletonProps> = ({ children }) => {
             onMobileSidebarToggle={() => setMobileSidebarOpen((prev) => !prev)}
           />
         </div>
-        <div className="flex-1 h-full overflow-y-auto p-2 pr-2.5 scrollbar-none">
+        <div className="flex-1 h-full min-w-0 overflow-y-auto p-2 pr-2.5 scrollbar-none">
           {children}
         </div>
       </div>

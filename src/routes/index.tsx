@@ -1,10 +1,21 @@
 import { RoutesInterface } from "@/types/components/sidebar";
-import { File, Home, MessageCircleMore, User } from "lucide-react";
+import {
+  File,
+  Home,
+  LayoutDashboard,
+  MessageCircleMore,
+  User,
+} from "lucide-react";
 
 const Routes: RoutesInterface[] = [
   {
-    title: "Example",
+    title: "Dashboard",
     path: "/",
+    icon: <LayoutDashboard />,
+  },
+  {
+    title: "Example",
+    path: "/example",
     icon: <Home />,
     // sub: [
     //   {

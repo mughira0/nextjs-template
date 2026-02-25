@@ -1,3 +1,5 @@
+import { ColumnDef } from "@/types/components/table";
+
 export const SOCKET_EVENTS = {
   EMIT: {
     USER_JOIN: "user:join",
@@ -29,3 +31,11 @@ export const CHAT_VIEW_STATE = {
   ROOMS: "rooms",
   CHAT: "chat",
 };
+
+export const transactionHeader: ColumnDef[] = [
+  { label: "Transaction ID", value: "id" },
+  { label: "User", value: "user" },
+  { label: "Amount", value: "amount" },
+  { label: "Status", value: "status", align: "center" },
+  { label: "Date", value: "date" },
+];

@@ -316,3 +316,108 @@ export const meUser = {
   photo: "/images/user3.png", // confident man in blazer, tech background
   isOnline: true,
 }; // Mughira as the current user for demo purposes
+// dashboardStats.ts
+import {
+  Users,
+  Activity,
+  DollarSign,
+  TrendingUp,
+  ShoppingCart,
+  Server,
+} from "lucide-react";
+
+export const dashboardStats = [
+  {
+    title: "Total Users",
+    value: "12,480",
+    icon: Users,
+    variant: "primary",
+  },
+  {
+    title: "Active Sessions",
+    value: "1,342",
+    icon: Activity,
+    variant: "primary-bordered",
+  },
+  {
+    title: "Monthly Revenue",
+    value: "$24,860",
+    icon: DollarSign,
+    variant: "primary-bordered",
+  },
+  {
+    title: "Growth Rate",
+    value: "18.4%",
+    icon: TrendingUp,
+    variant: "primary-bordered",
+  },
+  {
+    title: "Orders Today",
+    value: "286",
+    icon: ShoppingCart,
+    variant: "primary-bordered",
+  },
+  {
+    title: "API Requests",
+    value: "94,120",
+    icon: Server,
+    variant: "primary-bordered",
+  },
+] as const;
+export const revenueLineData = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+  datasets: [
+    {
+      label: "Revenue ($)",
+      data: [12400, 13800, 13150, 15200, 14800, 16750, 17400],
+      borderColor: "#2563eb",
+      borderWidth: 2,
+      tension: 0.4,
+      pointRadius: 4,
+    },
+  ],
+};
+
+export const trafficDonutData = {
+  labels: ["Organic", "Direct", "Referral", "Social", "Email"],
+  data: [38, 27, 18, 11, 6],
+  backgroundColors: ["#2563eb", "#16a34a", "#d97706", "#7c3aed", "#dc2626"],
+};
+// dashboardTransactions.ts
+export const dashboardTransactions = [
+  {
+    id: "TXN001",
+    user: "John Doe",
+    amount: "$120.50",
+    status: "Completed",
+    date: "2026-02-20",
+  },
+  {
+    id: "TXN002",
+    user: "Jane Smith",
+    amount: "$75.00",
+    status: "Pending",
+    date: "2026-02-21",
+  },
+  {
+    id: "TXN003",
+    user: "Ali Khan",
+    amount: "$200.00",
+    status: "Failed",
+    date: "2026-02-22",
+  },
+  {
+    id: "TXN004",
+    user: "Sara Ahmed",
+    amount: "$350.00",
+    status: "Completed",
+    date: "2026-02-23",
+  },
+  {
+    id: "TXN005",
+    user: "Mughira Ubaid",
+    amount: "$50.00",
+    status: "Pending",
+    date: "2026-02-24",
+  },
+];

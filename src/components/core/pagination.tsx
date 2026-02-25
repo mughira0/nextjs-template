@@ -42,7 +42,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
           onClick={() => setPage(p)}
           aria-current={active ? "page" : undefined}
           className={`
-            h-9 min-w-9 px-3 text-sm font-medium transition
+            h-8 min-w-8 px-1 text-sm font-medium transition
             rounded-[var(--pagination-radius)]
             border border-[var(--pagination-border)]
             ${
