@@ -23,7 +23,7 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
   const socketRef = useRef<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const { user, access_token: token } = useSelector(
-    (state: any) => state.authReducer
+    (state: any) => state.authReducer,
   );
   console.log("SocketProvider Socket:", socketRef);
   useEffect(() => {

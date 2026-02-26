@@ -3,6 +3,7 @@ import { SocketProvider } from "@/socket";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Toaster from "@/components/toast/toast-wrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
       >
         <ReduxProviders>
           <SocketProvider>{children}</SocketProvider>
+          <Toaster position="top-right" />
         </ReduxProviders>
       </body>
     </html>

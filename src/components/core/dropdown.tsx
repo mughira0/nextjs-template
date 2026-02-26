@@ -17,6 +17,7 @@ const Dropdown = <T,>({
   variant = "primary",
   disabled = false,
   isSearchable = false,
+  menuPlacement = "auto",
 }: DropdownProps<T>) => {
   const handleChange = (
     selected: SingleValue<{ label: string; value: T[keyof T] }>,
@@ -26,7 +27,7 @@ const Dropdown = <T,>({
 
   const mappedOptions =
     options?.map((opt) => ({
-      label: String(opt[optionLabel!]),a
+      label: String(opt[optionLabel!]),
       value: opt[optionValue!],
     })) || [];
 
@@ -152,6 +153,7 @@ const Dropdown = <T,>({
         onChange={handleChange}
         options={mappedOptions}
         placeholder={placeholder}
+        menuPlacement={menuPlacement}
         className={className}
         classNamePrefix="custom-select"
         styles={customStyles}

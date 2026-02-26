@@ -12,4 +12,5 @@ export interface DropdownProps<T = any> {
   variant?: "primary" | "secondary" | "error";
   disabled?: boolean;
   isSearchable?: boolean;
+  menuPlacement?: "auto" | "top" | "bottom";
 }

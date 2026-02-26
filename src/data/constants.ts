@@ -15,3 +15,9 @@ export const baseUrl = (url: string) => {
 export const imageUrl = (url: string) => {
   return `${S3_URL}${url}`;
 };
+
+export const TOAST_TYPES = {
+  SUCCESS: "success",
+  ERROR: "error",
+  WARNING: "warning",
+} as const;

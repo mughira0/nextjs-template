@@ -1,4 +1,6 @@
-import { imageUrl } from "@/data/constants";
+import { toast } from "@/components/toast/toast";
+import { imageUrl, TOAST_TYPES } from "@/data/constants";
+import { ToastVariant } from "@/types/components/toast";
 import { IUser } from "@/types/system/slice";
 import moment from "moment";
 
@@ -47,4 +49,18 @@ export const generateAvatarProps = (user: IUser) => {
 
 export const getFirstCharacter = (string: String) => {
   return string.charAt(0).toUpperCase();
+};
+
+export const renderToast = (
+  message: string,
+  variant: ToastVariant,
+  delay?: number,
+) => {
+  if (variant === TOAST_TYPES.SUCCESS) {
+    toast.success(message, delay);
+  } else if (variant === TOAST_TYPES.ERROR) {
+    toast.error(message, delay);
+  } else if (variant === TOAST_TYPES.WARNING) {
+    toast.warning(message, delay);
+  }
 };
