@@ -33,8 +33,8 @@ interface LoginData {
 
 function Login() {
   const router = useRouter();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [email, setEmail] = React.useState("testuser@yopmail.com");
+  const [password, setPassword] = React.useState("12345678");
   const [loading, setLoading] = React.useState<LoadingState>(false);
 
   // Local login
