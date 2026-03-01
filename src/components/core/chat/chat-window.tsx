@@ -1,19 +1,14 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { MessageCircleOff } from "lucide-react";
-import { ChatHeader } from "./chat-header";
-import { MessagesList } from "./messages-list";
-import { ChatInput } from "./chat-input";
-import { IMessage } from "@/types/system/slice";
-import {
-  roomsData,
-  users,
-  messages as messagesData,
-  meUser,
-} from "@/data/dummy";
+import { messages as messagesData, meUser, roomsData } from "@/data/dummy";
 import { RootState } from "@/redux/store/store";
+import { IMessage } from "@/types/system/slice";
+import { MessageCircleOff } from "lucide-react";
+import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
+import { ChatHeader } from "./chat-header";
+import { ChatInput } from "./chat-input";
+import { MessagesList } from "./messages-list";
 
 export function ChatWindow() {
   const { user } = useSelector((state: RootState) => state.authReducer);

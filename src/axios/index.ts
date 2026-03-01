@@ -1,10 +1,15 @@
-import { createHeaders } from "@/helper/generic";
+import { handleSignout } from "@/helper/auth";
+import { createHeaders, renderToast } from "@/helper/generic";
+import { dispatchFromStore } from "@/redux/store/store";
 import { ApiResult } from "@/types/api/generic";
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
+import { useRouter } from "next/navigation";
 
 const getErrorMessage = (error: any): string[] => {
   // Axios error object
+  console.log("Error object in getErrorMessage:", error); // Debug log
   if (error?.response?.data?.message) {
+    console.log("Error response data:", error.response.data); // Debug log
     const messages = error.response.data.message;
     if (Array.isArray(messages)) return messages;
     if (typeof messages === "string") return [messages];
@@ -26,6 +31,7 @@ const getErrorMessage = (error: any): string[] => {
       case 400:
         return ["Bad request. Please check your input."];
       case 401:
+        handleSignout();
         return ["Unauthorized. Your session may have expired."];
       case 403:
         return ["Forbidden. You don't have permission."];
@@ -72,11 +78,10 @@ const request = async <T = any>(
 
     return { success: true, data: response.data };
   } catch (error: any) {
-    console.log("Error caught in request:", error);
     const messages = getErrorMessage(error);
 
     // Log for debugging (remove in production if needed)
-    console.log("API Error:");
+    console.log("API Error:", messages);
 
     // Show toast notifications
     messages.forEach((msg) => {
@@ -84,9 +89,10 @@ const request = async <T = any>(
       //   duration: 6000,
       //   position: "top-center",
       // });
+      renderToast(msg, "error", 6000);
     });
 
-    return { success: false, error: messages };
+    return { success: false, error: messages, data: null };
   }
 };
 
@@ -122,5 +128,4 @@ export const Delete = <T = any>(
   url: string,
   accessToken: string | null = null,
   config: AxiosRequestConfig = {},
-): Promise<ApiResult<T>> =>
-  request<T>("delete", url, null, accessToken, config);
+): Promise<ApiResult<T>> => request<T>("delete", url, {}, accessToken, config);

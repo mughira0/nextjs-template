@@ -1,4 +1,4 @@
-import { IMessage, IRoom, IUser } from "@/types/system/slice";
+import { IMessage, IRoom, IUser, TRole } from "@/types/system/slice";
 
 // 5 core users (kept realistic with photos)
 export const users: IUser[] = [
@@ -8,14 +8,21 @@ export const users: IUser[] = [
     email: "mughir@techcorp.com",
     role: "admin",
     phone: "+92 335 266 8377",
+    isActive: true,
     photo: "/images/user3.png", // confident man in blazer, tech background
     isOnline: true,
+    createdAt: "2026-01-15T10:00:00Z",
+    updatedAt: "2026-02-20T12:00:00Z",
   },
   {
     _id: "u2",
     name: "Baptista Silva",
     email: "baptisa@freelance.io",
-    role: "client",
+    role: "user",
+    isActive: true,
+    createdAt: "2026-01-15T10:00:00Z",
+    updatedAt: "2026-02-20T12:00:00Z",
+
     phone: "+55 11 98765-4321",
     photo: "/images/user2.png", // casual professional man smiling
   },
@@ -23,21 +30,32 @@ export const users: IUser[] = [
     _id: "u3",
     name: "Sarah Chen",
     email: "sara@designstudio.com",
-    role: "member",
+    role: "user",
+    isActive: true,
+    createdAt: "2026-01-15T10:00:00Z",
+    updatedAt: "2026-02-20T12:00:00Z",
+
     photo: "/images/user.jpg", // professional woman with neat hair
   },
   {
     _id: "u4",
     name: "Alex Rivera",
     email: "aleivera@startup.ly",
-    role: "developer",
+    isActive: true,
+    createdAt: "2026-01-15T10:00:00Z",
+    updatedAt: "2026-02-20T12:00:00Z",
+
+    role: "user",
     photo: "/images/user2.png", // young dev in hoodie, friendly
   },
   {
     _id: "u5",
     name: "Priya Sharma",
     email: "priarma@agency.co",
-    role: "designer",
+    role: "user",
+    createdAt: "2026-01-15T10:00:00Z",
+    updatedAt: "2026-02-20T12:00:00Z",
+    isActive: true,
   },
 ];
 
@@ -311,10 +329,13 @@ export const meUser = {
   _id: "u5",
   name: "Me Khan",
   email: "Me@techcorp.com",
-  role: "admin",
+  role: "admin" as TRole,
   phone: "+92 335 266 8377",
   photo: "/images/user3.png", // confident man in blazer, tech background
   isOnline: true,
+  isActive: true,
+  createdAt: "2026-01-15T10:00:00Z",
+  updatedAt: "2026-02-20T12:00:00Z",
 }; // Mughira as the current user for demo purposes
 // dashboardStats.ts
 import {

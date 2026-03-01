@@ -6,6 +6,7 @@ import TextArea from "@/components/core/textArea";
 import Dropdown from "@/components/core/dropdown";
 import { Box } from "@/components/core/box";
 import SidebarSkeleton from "@/components/core/sidebar-skeleton";
+import { DropdownOption } from "@/types/components/dropdown";
 
 function Example() {
   const [inputValue1, setInputValue1] = React.useState({
@@ -20,7 +21,7 @@ function Example() {
     error: "",
   });
   const [dropdownValue1, setDropdownValue1] = React.useState<
-    SizeState<string | null>
+    SizeState<DropdownOption | null>
   >({
     sm: null,
     md: null,
@@ -28,7 +29,7 @@ function Example() {
   });
 
   const [dropdownValue2, setDropdownValue2] = React.useState<
-    VariantState<string | null>
+    VariantState<DropdownOption | null>
   >({
     primary: null,
     secondary: null,
@@ -40,7 +41,7 @@ function Example() {
     { label: "Option 2", value: "option2" },
     { label: "Option 3", value: "option3" },
     { label: "Option 4", value: "option4" },
-  ];
+  ] as DropdownOption[];
 
   return (
     <SidebarSkeleton>
@@ -283,11 +284,12 @@ function Example() {
               </div>
 
               <div className="space-y-6">
-                <Dropdown
+                <Dropdown<DropdownOption>
                   value={dropdownValue1.sm}
-                  setter={(val) =>
-                    setDropdownValue1((prev) => ({ ...prev, sm: val }))
-                  }
+                  setter={(val) => {
+                    if (val)
+                      setDropdownValue1((prev) => ({ ...prev, sm: val }));
+                  }}
                   options={dropdownOptions}
                   label="Small Dropdown"
                   placeholder="Select small size"

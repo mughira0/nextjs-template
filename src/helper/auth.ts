@@ -19,7 +19,7 @@ export const handleDecryption = (
   try {
     const bytes = CryptoJS.AES.decrypt(cipherText, SECRET_KEY);
     const decrypted = bytes.toString(CryptoJS.enc.Utf8);
-    return decrypted || null; // AES.decrypt can return empty string on invalid data
+    return decrypted || null;
   } catch (error) {
     console.error("Decryption failed:", error);
     return null;
@@ -38,20 +38,20 @@ const setEncryptedCookie = (
   Cookies.set(key, encrypted, {
     secure: true,
     sameSite: "Strict",
-    expires: 30, // 30 days
+    expires: 30,
     ...options,
   });
 };
 
 // Signin
 export const handleSignin = (
-  response: { user: IUser; token: string },
-  router: AppRouterInstance, // Next.js App Router
-  // router: NavigateFunction,     // Uncomment if using React Router
+  response: { user: IUser; accessToken: string },
+  router: AppRouterInstance,
   redirect: string | null = null,
 ): void => {
   console.log("Signin response:", response);
-  const { token: accessToken } = response;
+  const { accessToken } = response;
+  console.log("Access Token:", accessToken);
 
   if (!accessToken) return;
 
@@ -67,13 +67,18 @@ export const handleSignin = (
 
 // Signout
 export const handleSignout = (
-  redirect: string = "/auth/login",
-  router: AppRouterInstance, // Adjust type if using different router
+  router?: AppRouterInstance,
+  redirect?: string,
 ): void => {
   Object.values(COOKIES_KEYS).forEach((key) => Cookies.remove(key));
 
   dispatchFromStore(logoutUser());
-
-  // Small delay to ensure Redux state updates before redirect
-  setTimeout(() => router.push(redirect), 100);
+  const logoutRoute = redirect ? redirect : "/auth/login";
+  setTimeout(() => {
+    if (redirect && router) {
+      router.push(logoutRoute);
+    } else {
+      window.location.href = logoutRoute;
+    }
+  }, 100);
 };

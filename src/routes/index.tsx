@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   MessageCircleMore,
   Settings,
+  ShieldHalf,
   User,
 } from "lucide-react";
 
@@ -47,6 +48,11 @@ const Routes: RoutesInterface[] = [
     title: "Users",
     path: "/user",
     icon: <User />,
+  },
+  {
+    title: "Teams",
+    path: "/teams",
+    icon: <ShieldHalf />,
   },
   {
     title: "Chart Example",

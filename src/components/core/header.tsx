@@ -8,19 +8,12 @@ import { imageUrl } from "@/data/constants";
 import { Avatar } from "@/components/core/avatar";
 import { IUser } from "@/types/system/slice";
 import { HeaderProps } from "@/types/components/sidebar";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 // ─── Dummy user (swap with Redux selector) ────────────────────────────────────
-
-const DUMMY_USER: IUser = {
-  _id: "1",
-  name: "Jordan Blake",
-  email: "jordan@example.com",
-  role: "Admin",
-  isOnline: true,
-  photo: null,
-};
 
 // ─── Dummy notifications ──────────────────────────────────────────────────────
 
@@ -262,7 +255,7 @@ function NotificationPanel({
 // ─── Header ───────────────────────────────────────────────────────────────────
 
 const Header: FC<HeaderProps> = ({ isMobileView, onMobileSidebarToggle }) => {
-  const user = DUMMY_USER; // swap: const user = useSelector(...)
+  const { user } = useSelector((state: RootState) => state.authReducer);
   const [notifications, setNotifications] = useState(DUMMY_NOTIFICATIONS);
   const [notifOpen, setNotifOpen] = useState(false);
   const notifRef = useRef<HTMLDivElement>(null);
@@ -396,43 +389,40 @@ const Header: FC<HeaderProps> = ({ isMobileView, onMobileSidebarToggle }) => {
         />
 
         {/* User chip */}
-        <div className="flex items-center gap-2">
-          <Avatar
-            src={user.photo ? imageUrl(user.photo) : null}
-            alt={user.name}
-            fallback={user.name
-              .split(" ")
-              .map((w) => w[0])
-              .join("")
-              .slice(0, 2)
-              .toUpperCase()}
-            size={28}
-            isOnline={user.isOnline}
-          />
-          {!isMobileView && (
-            <div className="flex flex-col leading-none">
-              <span
-                style={{
-                  fontSize: 12.5,
-                  fontWeight: 600,
-                  color: "var(--primary-text-color)",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {user.name}
-              </span>
-              <span
-                style={{
-                  fontSize: 11,
-                  color: "var(--secondary-text-color)",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {user.role}
-              </span>
-            </div>
-          )}
-        </div>
+        {user && (
+          <div className="flex items-center gap-2">
+            <Avatar
+              src={user.photo ? imageUrl(user.photo) : null}
+              alt={user.name}
+              fallback={user?.name}
+              size={28}
+              isOnline={user.isOnline}
+            />
+            {!isMobileView && (
+              <div className="flex flex-col leading-none">
+                <span
+                  style={{
+                    fontSize: 12.5,
+                    fontWeight: 600,
+                    color: "var(--primary-text-color)",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {user.name}
+                </span>
+                <span
+                  style={{
+                    fontSize: 11,
+                    color: "var(--secondary-text-color)",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {user.role}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </aside>
   );

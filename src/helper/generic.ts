@@ -1,5 +1,11 @@
 import { toast } from "@/components/toast/toast";
-import { imageUrl, TOAST_TYPES } from "@/data/constants";
+import {
+  baseUrl,
+  imageUrl,
+  TOAST_TYPES,
+  TOTAL_RECORDS,
+} from "@/data/constants";
+import { TParams } from "@/types/api/generic";
 import { ToastVariant } from "@/types/components/toast";
 import { IUser } from "@/types/system/slice";
 import moment from "moment";
@@ -27,7 +33,15 @@ export const createHeaders = (
 
   return headers;
 };
-
+export const camelCaseToLowerCase = (str: string) => {
+  if (!str) return "";
+  return str.replace(/([A-Z])/g, " $1").trim();
+};
+export const camelCaseToCapitalized = (str: string) => {
+  if (!str) return "";
+  const s = camelCaseToLowerCase(str);
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
 export const formatMessageDate = (date: string | Date, format = "hh:mm A") => {
   return moment(date).format(format);
 };
@@ -63,4 +77,48 @@ export const renderToast = (
   } else if (variant === TOAST_TYPES.WARNING) {
     toast.warning(message, delay);
   }
+};
+
+export const getTotalCount = (
+  total: number = 0,
+  recordsPerPage: number = TOTAL_RECORDS,
+) => {
+  return Math.ceil(total / recordsPerPage);
+};
+
+export const makeUrlQyeryString = (
+  params: Record<string, string | number>,
+  url: string,
+) => {
+  const obj = {} as Record<string, string>;
+  for (const key in params) {
+    obj[key] = String(params[key]);
+  }
+  const queryString = new URLSearchParams(obj).toString();
+  return baseUrl(url) + "?" + queryString;
+};
+
+export const validateParams = (
+  params: TParams,
+  skipKeys: string[] = [],
+): boolean => {
+  for (const key in params) {
+    if (skipKeys.includes(key)) continue;
+
+    const val = params[key];
+
+    if (Array.isArray(val)) {
+      if (val.length === 0) {
+        renderToast(`${camelCaseToCapitalized(key)} is required.`, "error");
+        return false;
+      }
+    } else {
+      if (!val || String(val).trim() === "") {
+        renderToast(`${camelCaseToCapitalized(key)} is required.`, "error");
+        return false;
+      }
+    }
+  }
+
+  return true; // all validations passed
 };

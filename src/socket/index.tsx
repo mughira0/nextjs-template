@@ -39,7 +39,7 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
     const socket = io(SOCKET_BASE_URL || "", {
       transports: ["websocket"],
       auth: { token },
-      reconnection: true,
+      // reconnection: true,
 
       reconnectionDelay: 1000,
       reconnectionAttempts: 5,

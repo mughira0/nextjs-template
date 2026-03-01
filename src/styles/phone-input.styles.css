@@ -1,0 +1,35 @@
+.phone-input-wrapper .react-tel-input .form-control {
+  background: transparent !important;
+  padding-left: 48px !important;
+  width: 100% !important;
+  height: auto !important;
+  line-height: inherit !important;
+  font-family: inherit !important;
+  border: 1px solid var(--input-border) !important;
+  color: inherit !important;
+}
+
+.phone-input-wrapper .react-tel-input .flag-dropdown {
+  position: absolute;
+  top: 0;
+  border: 1px solid var(--input-border) !important;
+
+  bottom: 0;
+  left: 0;
+}
+
+.phone-input-wrapper .react-tel-input .flag-dropdown.open,
+.phone-input-wrapper .react-tel-input .flag-dropdown:hover {
+}
+
+.phone-input-wrapper .react-tel-input .selected-flag {
+  padding: 0 8px 0 10px;
+  border-radius: var(--field-radius) 0 0 var(--field-radius) !important;
+  background: transparent !important;
+}
+
+.phone-input-wrapper .react-tel-input .selected-flag:hover,
+.phone-input-wrapper .react-tel-input .selected-flag:focus {
+  background: rgba(128, 128, 128, 0.1) !important;
+  overflow: hidden;
+}

@@ -39,7 +39,6 @@ export interface TableStructureProps {
   customeBodyStyle?: React.CSSProperties;
   className?: string;
   bodyClassName?: string;
-  minHeight?: string;
   noDataText?: string;
   stickyHeader?: boolean;
   loading?: boolean;

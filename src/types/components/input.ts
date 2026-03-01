@@ -10,3 +10,9 @@ export interface InputProps {
   size?: "sm" | "md" | "lg";
   variant?: "primary" | "secondary" | "error";
 }
+export interface PhoneInputProps extends Omit<InputProps, "type"> {
+  defaultCountry?: string;
+  onlyCountries?: string[];
+  preferredCountries?: string[];
+  enableSearch?: boolean;
+}

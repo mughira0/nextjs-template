@@ -57,19 +57,16 @@ const Tabs: FC<TabsProps> = ({
 
   return (
     <div className={cn("flex flex-col gap-3", className)}>
-      {/* ── Tab strip ── */}
       <div
         ref={wrapperRef}
         role="tablist"
         className={cn(styles.wrapper, fullWidth ? "w-full" : "w-fit")}
       >
-        {/* Sliding pill indicator */}
         <div
           aria-hidden
           className={cn(
             "absolute top-1 left-1 rounded-[calc(var(--btn-radius)-2px)]",
             "transition-all duration-250 ease-[cubic-bezier(0.35,0,0.25,1)]",
-            // subtle inner shadow so it looks lifted
             "shadow-[0_1px_3px_oklch(0%_0_0_/_0.18)]",
             styles.indicator,
           )}
@@ -93,7 +90,6 @@ const Tabs: FC<TabsProps> = ({
                 sizeConfig.font,
                 styles.tab.base,
                 isActive && styles.tab.active,
-                // when active, kill hover bg so indicator shows cleanly
                 isActive &&
                   "hover:bg-transparent hover:text-[var(--white-color)]",
                 fullWidth && "flex-1",

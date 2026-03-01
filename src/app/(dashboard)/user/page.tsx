@@ -171,7 +171,6 @@ export default function UsersPage() {
             setSelectedIndex(undefined);
           }}
           customeBodyStyle={{ maxHeight: "400px" }}
-          minHeight="200px"
           noDataText="No users match your search."
           loading={loading}
           skeletonRows={5}

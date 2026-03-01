@@ -1,5 +1,6 @@
 "use client";
 
+import { Search } from "lucide-react";
 import React from "react";
 
 interface NoDataProps {
@@ -12,7 +13,7 @@ interface NoDataProps {
 const NoData: React.FC<NoDataProps> = ({
   title = "No data found",
   description = "There is nothing to show here yet.",
-  icon = "📭",
+  icon = <Search size={34} />,
   className = "",
 }) => {
   return (

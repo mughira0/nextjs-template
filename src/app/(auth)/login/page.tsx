@@ -7,14 +7,17 @@ import Input from "@/components/core/input";
 import { baseUrl } from "@/data/constants";
 import { handleSignin } from "@/helper/auth";
 import { IUser } from "@/types/system/slice";
+import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
 
 // Constants
 const LOADIN_STATE = {
   LOGIN: "login",
+  GOOGLE: "google",
 } as const;
 
 const API_ROUTES = {
   LOGIN: "auth/login",
+  GOOGLE: "auth/google-login",
 } as const;
 
 type LoadingState = (typeof LOADIN_STATE)[keyof typeof LOADIN_STATE] | false;
@@ -22,13 +25,11 @@ type LoadingState = (typeof LOADIN_STATE)[keyof typeof LOADIN_STATE] | false;
 // Type for API success data
 interface LoginData {
   data: {
-    token: string;
+    accessToken: string;
     user: IUser;
   };
   success: boolean;
 }
-
-// API response wrapper
 
 function Login() {
   const router = useRouter();
@@ -36,6 +37,7 @@ function Login() {
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState<LoadingState>(false);
 
+  // Local login
   const handleLogin = async () => {
     setLoading(LOADIN_STATE.LOGIN);
 
@@ -44,7 +46,24 @@ function Login() {
       password,
     });
 
-    if (result.success) {
+    if (result.data) {
+      handleSignin(result.data?.data, router, "/");
+    }
+
+    setLoading(false);
+  };
+
+  // Google login
+  const handleGoogleLogin = async (credentialResponse: CredentialResponse) => {
+    if (!credentialResponse.credential) return;
+
+    setLoading(LOADIN_STATE.GOOGLE);
+
+    const result = await Post<LoginData>(`${baseUrl(API_ROUTES.GOOGLE)}`, {
+      idToken: credentialResponse.credential,
+    });
+
+    if (result.data) {
       handleSignin(result.data?.data, router, "/");
     }
 
@@ -83,10 +102,18 @@ function Login() {
             >
               Login
             </Button>
+
+            <div className="w-full flex justify-center w-full">
+              <GoogleLogin
+                onSuccess={handleGoogleLogin}
+                width={"100%"}
+                onError={() => console.log("Google login failed")}
+              />
+            </div>
           </div>
         </div>
 
-        <div className="w-full flex justify-center mt-6">
+        <div className="w-full flex justify-center ">
           <p
             className="hover:underline cursor-pointer"
             onClick={() => router.push("/register")}

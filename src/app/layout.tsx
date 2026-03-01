@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Toaster from "@/components/toast/toast-wrapper";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,10 +31,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReduxProviders>
-          <SocketProvider>{children}</SocketProvider>
-          <Toaster position="top-right" />
-        </ReduxProviders>
+        <GoogleOAuthProvider
+          clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
+        >
+          <ReduxProviders>
+            {/* <SocketProvider>{children}</SocketProvider> */}
+            {children}
+            <Toaster position="top-right" />
+          </ReduxProviders>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );

@@ -1,5 +1,3 @@
-import { CHAT_VIEW_STATE } from "@/data/usage";
-
 export interface IAuthState {
   user: IUser | null;
   isLogin: boolean;
@@ -14,9 +12,12 @@ export interface IUser {
   name: string;
   email?: string;
   isOnline?: boolean;
-  role: string | null;
+  role: TRole;
+  isActive: boolean;
   phone?: string;
   photo?: string | null;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IMessage {
@@ -44,3 +45,4 @@ export interface IChatState {
   unreadCount: number;
   chatView: string;
 }
+export type TRole = "user" | "admin";

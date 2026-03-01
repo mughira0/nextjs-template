@@ -16,7 +16,6 @@ const SearchInput: FC<SearchInputProps> = ({
 
   const handleSearch = () => {
     const trimmed = query.trim();
-    if (!trimmed) return;
     onSearch(trimmed);
   };
 
@@ -30,7 +29,6 @@ const SearchInput: FC<SearchInputProps> = ({
       onKeyDown={handleKeyDown}
       role="search"
     >
-      {/* Input — remove its own border-radius on the right side */}
       <div className="flex-1 [&_input]:rounded-r-none [&_input]:border-r-0">
         <Input
           value={query}
@@ -41,7 +39,6 @@ const SearchInput: FC<SearchInputProps> = ({
         />
       </div>
 
-      {/* Button — flush left edge, rounded only on the right */}
       <Button
         onClick={handleSearch}
         size={size}

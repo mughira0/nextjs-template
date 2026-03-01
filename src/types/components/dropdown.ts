@@ -1,6 +1,6 @@
 export interface DropdownProps<T = any> {
-  value?: T[keyof T] | null;
-  setter?: (value: T[keyof T] | null) => void;
+  value?: T | T[keyof T] | null;
+  setter?: (value: T | null) => void;
   options?: T[];
   placeholder?: string;
   label?: string;
@@ -12,5 +12,10 @@ export interface DropdownProps<T = any> {
   variant?: "primary" | "secondary" | "error";
   disabled?: boolean;
   isSearchable?: boolean;
+  isMultiple?: boolean;
   menuPlacement?: "auto" | "top" | "bottom";
+  showClearIcon?: boolean;
 }
+export type DropdownOption = {
+  [key: string]: any;
+};

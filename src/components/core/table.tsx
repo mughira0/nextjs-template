@@ -42,7 +42,6 @@ export default function TableStructure({
   customeBodyStyle,
   className = "",
   bodyClassName = "",
-  minHeight,
   noDataText = "No data found",
   stickyHeader = false,
   loading = false,
@@ -108,7 +107,6 @@ export default function TableStructure({
       <div className="w-full">
         <div
           className={`overflow-x-auto  max-w-[100vw] overflow-y-auto ${bodyClassName}`}
-          style={{ minHeight, ...customeBodyStyle }}
         >
           <table
             className="w-full  table-fixed text-[var(--fs-sm)]"
@@ -161,7 +159,11 @@ export default function TableStructure({
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody
+              style={{
+                ...customeBodyStyle,
+              }}
+            >
               {loading ? (
                 Array.from({ length: skeletonRows }).map((_, i) => (
                   <SkeletonRow key={i} count={header.length} />

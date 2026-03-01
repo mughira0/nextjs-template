@@ -86,7 +86,6 @@ function Dashboard() {
           totalPages={1}
           setPage={() => {}}
           customeBodyStyle={{ maxHeight: "300px" }}
-          minHeight="200px"
           noDataText="No recent transactions."
         />
       </div>

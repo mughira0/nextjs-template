@@ -39,3 +39,12 @@ export const transactionHeader: ColumnDef[] = [
   { label: "Status", value: "status", align: "center" },
   { label: "Date", value: "date" },
 ];
+
+export const teamsHeader: ColumnDef[] = [
+  { label: "Team", value: "name" },
+  { label: "Members", value: "members" },
+  { label: "Created By", value: "createdBy" },
+  { label: "Created At", value: "createdAt" },
+  { label: "Status", value: "isActive" },
+  { label: "Actions", value: "actions", align: "center", width: "120px" },
+];

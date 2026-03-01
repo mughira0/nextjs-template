@@ -13,6 +13,7 @@
   --white-color: oklch(100% 0 0);
   --secondary-text-color: oklch(45% 0.03 260); /* Medium-dark gray */
   --card: oklch(1 0 0); /* default white-ish */
+  --border-color: oklch(88% 0.015 260);
 
   --radius: 0.625rem;
   --global-radius: 10px;
@@ -34,7 +35,7 @@
   --btn-padding-lg: 1rem 2rem;
 
   --field-radius: 7px;
-  --field-border: oklch(88% 0.015 260); /* Softer light gray border */
+  --field-border: var(--border-color);
   --field-color: oklch(15% 0.02 260);
   --field-bg: oklch(100% 0 0);
   --btn-radius: var(--field-radius);
@@ -176,11 +177,12 @@
   --white-color: oklch(100% 0 0);
   --secondary-text-color: oklch(76.539% 0.00974 258.463);
   --card: oklch(18% 0.01 265);
+  --border-color: oklch(30% 0.02 260);
 
   --app-bg: oklch(11% 0.008 265);
 
   /* Fields & buttons */
-  --field-border: oklch(30% 0.02 260);
+  --field-border: var(--border-color);
   --field-color: oklch(90% 0.01 260);
   --field-bg: oklch(0.23 0.04 264);
 

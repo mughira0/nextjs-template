@@ -3,7 +3,7 @@ import { IAuthState, IUser } from "@/types/system/slice";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IAuthState = {
-  user: meUser,
+  user: null,
   isLogin: false,
   unreadCount: 0,
   access_token: null,
@@ -15,10 +15,10 @@ const authSlice = createSlice({
   reducers: {
     saveLoginUserData(
       state,
-      action: PayloadAction<{ user: IUser; token: string }>,
+      action: PayloadAction<{ user: IUser; accessToken: string }>,
     ) {
       state.user = action.payload.user;
-      state.access_token = action.payload.token;
+      state.access_token = action.payload.accessToken;
       state.isLogin = true;
     },
     logoutUser(state) {

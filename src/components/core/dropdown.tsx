@@ -1,7 +1,7 @@
 "use client";
 import dropdownBase from "@/baseStyles/dropdown.styles";
 import { DropdownProps } from "@/types/components/dropdown";
-import Select, { SingleValue, StylesConfig } from "react-select";
+import Select, { MultiValue, SingleValue, StylesConfig } from "react-select";
 import Label from "./label";
 const Dropdown = <T,>({
   value,
@@ -15,24 +15,59 @@ const Dropdown = <T,>({
   error,
   size = "md",
   variant = "primary",
+  isMultiple = false,
   disabled = false,
   isSearchable = false,
   menuPlacement = "auto",
+  showClearIcon = false,
 }: DropdownProps<T>) => {
   const handleChange = (
-    selected: SingleValue<{ label: string; value: T[keyof T] }>,
+    selected:
+      | SingleValue<{ label: string; value: T[keyof T] }>
+      | MultiValue<{ label: string; value: T[keyof T] }>,
   ) => {
-    if (setter) setter(selected ? selected.value : null);
-  };
+    if (!setter) return;
 
+    if (isMultiple) {
+      const multi = selected as MultiValue<{
+        label: string;
+        value: T[keyof T];
+      }>;
+      if (!multi || multi.length === 0) return setter(null);
+      const fullObjects = multi
+        .map((s) => options.find((opt) => opt[optionValue!] === s.value))
+        .filter(Boolean) as T[];
+      setter(fullObjects as unknown as T); // for multi, cast needed
+    } else {
+      const single = selected as SingleValue<{
+        label: string;
+        value: T[keyof T];
+      }>;
+      if (!single) return setter(null);
+      const fullObject =
+        options.find((opt) => opt[optionValue!] === single.value) ?? null;
+      setter(fullObject); // ✅ clean, no cast needed
+    }
+  };
   const mappedOptions =
     options?.map((opt) => ({
       label: String(opt[optionLabel!]),
       value: opt[optionValue!],
     })) || [];
-
-  const selectedOption =
-    mappedOptions.find((opt) => opt.value === value) || null;
+  const selectedOption = isMultiple
+    ? mappedOptions.filter((opt) => {
+        if (!Array.isArray(value)) return false;
+        return (value as T[]).some(
+          (v) =>
+            (typeof v === "object" ? (v as T)[optionValue!] : v) === opt.value,
+        );
+      })
+    : (mappedOptions.find((opt) => {
+        if (value && typeof value === "object") {
+          return (value as T)[optionValue!] === opt.value;
+        }
+        return opt.value === value;
+      }) ?? null);
 
   // Get size and variant configs
   const sizeConfig = dropdownBase.sizes[size] || dropdownBase.sizes.md;
@@ -43,7 +78,7 @@ const Dropdown = <T,>({
   // Custom styles for react-select
   const customStyles: StylesConfig<
     { label: string; value: T[keyof T] },
-    false
+    boolean
   > = {
     control: (provided, state) => ({
       ...provided,
@@ -116,19 +151,15 @@ const Dropdown = <T,>({
     }),
     option: (provided, state) => {
       let backgroundColor = "transparent";
-      if (state.isFocused) {
-        backgroundColor = variantConfig.focusBorderColorLight;
-      } else if (state.isSelected) {
+      if (state.isSelected) {
         backgroundColor = variantConfig.focusBorderColor;
       }
 
       return {
         ...provided,
         backgroundColor,
-        color:
-          state.isSelected || state.isFocused
-            ? "var(--white-color)"
-            : "var(--input-color)",
+        marginBottom: "4px",
+        color: state.isSelected ? "var(--white-color)" : "var(--input-color)",
         cursor: "pointer",
         borderRadius: "4px",
         padding: sizeConfig.padding,
@@ -136,8 +167,35 @@ const Dropdown = <T,>({
         "&:active": {
           backgroundColor: variantConfig.focusBorderColor,
         },
+        "&:hover": {
+          backgroundColor: variantConfig.focusBorderColorLight,
+          color: "var(--white-color)",
+        },
       };
     },
+
+    multiValue: (provided) => ({
+      ...provided,
+      backgroundColor: variantConfig.multiValueBg,
+      borderRadius: "4px",
+    }),
+    multiValueLabel: (provided) => ({
+      ...provided,
+      color: variantConfig.multiValueColor,
+      fontSize: sizeConfig.control.fontSize,
+      fontWeight: 500,
+      padding: "1px 4px",
+    }),
+    multiValueRemove: (provided) => ({
+      ...provided,
+      color: variantConfig.multiValueColor,
+      borderRadius: "0 4px 4px 0",
+      cursor: "pointer",
+      "&:hover": {
+        backgroundColor: variantConfig.focusBorderColor,
+        color: "var(--white-color)",
+      },
+    }),
     noOptionsMessage: (provided) => ({
       ...provided,
       color: "var(--placeholder-color)",
@@ -158,8 +216,9 @@ const Dropdown = <T,>({
         classNamePrefix="custom-select"
         styles={customStyles}
         isDisabled={disabled}
-        isClearable
+        isClearable={showClearIcon}
         isSearchable={isSearchable}
+        isMulti={isMultiple}
       />
       {error && (
         <span className="text-[var(--danger-color)] text-sm mt-1">{error}</span>
